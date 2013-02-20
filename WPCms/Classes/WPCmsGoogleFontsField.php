@@ -30,11 +30,22 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
 
     $fonts = file_get_contents(__DIR__ . '/../assets/google.fonts.list');
     $fonts = explode(PHP_EOL, $fonts);
+    $families = array();
 
     foreach ($fonts as $font) {
 
+      $f = array_shift(explode(':', $font));
+
+      if (isset($families[$f])) $families[$f] .= ',' . array_pop(explode(':', $font));
+      else $families[$f] = $font;
+    }
+
+    foreach ($fonts as $font) {
+
+      $f = array_shift(explode(':', $font));
+
       $selected = ($font == $data['value'] ? ' selected="selected"' : '');
-      echo '<option ', $selected,' value="', $font, '">', $font, '</option>';
+      echo '<option ', $selected,' value="', $font, '" data-font="', urlencode($families[$f]), '">', $font, '</option>';
     }
 
     echo '</select>';
