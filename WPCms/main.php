@@ -12,6 +12,7 @@ require_once "Classes/WPCmsMultilanguageField.php";
 require_once "Classes/WPCmsInputField.php";
 require_once "Classes/WPCmsTextField.php";
 require_once "Classes/WPCmsTextareaField.php";
+require_once "Classes/WPCmsTinyMCEField.php";
 require_once "Classes/WPCmsPasswordField.php";
 require_once "Classes/WPCmsCheckboxField.php";
 require_once "Classes/WPCmsSelectField.php";
@@ -53,6 +54,7 @@ $txtComuni = new WPCmsSettingsPage(
     new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
     new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
     new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
+    new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
     new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
     new WPCmsCheckboxField('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
     new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
@@ -120,6 +122,7 @@ $customPostType = new WPCmsPostType(
         new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
         new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
         new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
+        new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
         new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
         new WPCmsCheckboxField('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
         new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
@@ -141,14 +144,20 @@ $customPostType = new WPCmsPostType(
           new WPCmsMultilanguageField (
         new WPCmsTextField ('text2', 'WPCmsTextField 2', 'If you pass an array as \'default\' parameter<br />array(\'{$lang}\' => \'{$value}\', ...)<br />you can define different default values for every langauge', array('en' => 'default value EN', 'it' => 'default value IT'))),
           new WPCmsMultilanguageField (
-        new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context'))
+        new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context')),
+          new WPCmsMultilanguageField (
+        new WPCmsTinyMCEField ('tinymce2', 'WPCmsTinyMCEField 2', 'Example of WPCmsTinyMCEField'))
       )
     )
   )
 );
 
 $customPostType->setArgs(array(
-    'taxonomies' => array('custom-taxonomy')
+    'taxonomies' => array('custom-taxonomy'),
+    'supports' => array(
+      'title',
+      'revisions'
+    )
 ));
 
 $customPostType->setLabels(array(
