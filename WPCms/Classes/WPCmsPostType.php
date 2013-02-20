@@ -2,51 +2,76 @@
 
 Class WPCmsPostType {
 
-  function __construct ($post_type, $args, $custom_fields = array(), $adminBarParent = false) {
+  function __construct ($post_type, $custom_fields = array(), $adminBarParent = false) {
 
     $this->post_type = $post_type;
-
-    $this->theme_hash = defined('THEME_HASH') ? THEME_HASH : '';
     $this->custom_fields = $custom_fields;
-    $labels = $args['labels'];
 
-    if (is_array($labels)) {
+    $labels = array(
+      'name' => __('Custom Items'),
+      'singular_name' => __('Custom Item'),
+      'add_new' => __('Add New'),
+      'add_new_item' => __('Add New Item'),
+      'edit_item' => __('Edit Item'),
+      'new_item' => __('New Item'),
+      'view_item' => __('View Item'),
+      'search_items' => __('Search Items'),
+      'not_found' =>  __('No items found'),
+      'not_found_in_trash' => __('No items found in Trash'),
+      'parent_item_colon' => '',
+      'menu_name' => __('Custom Items')
+    );
 
-      $labels = array(
-        'name' => __(isset($labels['name']) ? $labels['name'] : 'Custom Items', $this->theme_hash),
-        'singular_name' => __(isset($labels['singular_name']) ? $labels['singular_name'] : 'Custom Item', $this->theme_hash),
-        'add_new' => __(isset($labels['add_new']) ? $labels['add_new'] : 'Add New', $this->theme_hash),
-        'add_new_item' => __(isset($labels['add_new_item']) ? $labels['add_new_item'] : 'Add New Item', $this->theme_hash),
-        'edit_item' => __(isset($labels['edit_item']) ? $labels['edit_item'] : 'Edit Item', $this->theme_hash),
-        'new_item' => __(isset($labels['new_item']) ? $labels['new_item'] : 'New Item', $this->theme_hash),
-        'view_item' => __(isset($labels['view_item']) ? $labels['view_item'] : 'View Item', $this->theme_hash),
-        'search_items' => __(isset($labels['search_items']) ? $labels['search_items'] : 'Search Item', $this->theme_hash),
-        'not_found' =>  __(isset($labels['not_found']) ? $labels['not_found'] : 'No item found', $this->theme_hash),
-        'not_found_in_trash' => __(isset($labels['not_found_in_trash']) ? $labels['not_found_in_trash'] : 'No items found in Trash', $this->theme_hash),
-        'parent_item_colon' => isset($labels['menu_name']) ? $labels['menu_name'] : '',
-        'menu_name' => __(isset($labels['menu_name']) ? $labels['menu_name'] : 'Custom Items', $this->theme_hash)
-      );
-    }
-    else {
-      return false;
-    }
+    $args = array(
+      'public' => true,
+      'exclude_from_search' => false,
+      'publicly_queryable' => true,
+      'show_ui' => true,
+      'query_var' => true,
+      'has_archive' => true,
+      'show_in_menu' => true,
+      'capability_type' => 'post',
+      'map_meta_cap' => true,
+      'hierarchical' => false,
+      'menu_position' => null,
+      'taxonomies' => array(),
+      'supports' => array(
+        'title',
+        'editor',
+        'thumbnail',
+        'revisions'
+      )
+    );
 
-    if (is_array($args)) {
+    $args['labels'] = $labels;
+    $this->args = $args;
 
-      $args['labels'] = $labels;
-      $this->args = $args;
-    }
-    else {
-      return false;
-    }
+    return $this;
+  }
+
+  function register () {
 
     add_action('after_setup_theme', array($this, 'after_setup_theme'));
-
     add_action('init', array($this, 'add_posttype'));
 
     return $this;
   }
 
+  function setArgs ($args = array()) {
+
+    $labels = $this->args['labels'];
+    $this->args = array_merge($this->args, $args);
+    $this->args['labels'] = $labels;
+
+    return $this;
+  }
+
+  function setLabels ($labels = array()) {
+
+    $this->args['labels'] = array_merge($this->args['labels'], $labels);
+
+    return $this;
+  }
 
   function after_setup_theme () {
     if (in_array('thumbnail', $this->args['supports'])) {
@@ -158,7 +183,13 @@ Class WPCmsPostType {
       wp_enqueue_script('thickbox');
       wp_enqueue_style('thickbox');
     }
+
     foreach ($this->custom_fields as $id => $field) {
+      $field = array_merge(array(
+        'title' => 'Custom Fields',
+        'context' => 'normal',
+        'priority' => 'high'), $field);
+
       add_meta_box(
         $id,
         $field['title'],

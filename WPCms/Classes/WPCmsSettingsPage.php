@@ -62,9 +62,10 @@ Class WPCmsSettingsPage {
   }
 
   public function settingsPage () {
-    echo '<div class="wrap">',
-      '<h2>' . $this->title . '</h2>',
-      '<form method="post" action="options.php" enctype="multipart/form-data">';
+    echo '<form method="post" action="options.php" enctype="multipart/form-data">',
+      '<div class="wrap">',
+        '<h1>' . $this->title . '</h1>',
+          '<div class="postbox">';
 
       settings_fields($this->options_group);
       do_settings_fields($this->options_group, 'options-general.php');
@@ -77,10 +78,11 @@ Class WPCmsSettingsPage {
       }
 
       echo '</table>',
+          '</div>',
+        '</div>',
         '<p class="submit">',
           '<input type="submit" class="button-primary" value="' . __('Save Changes') . '" />',
         '</p>',
-      '</form>',
-    '</div>';
+      '</form>';
   }
 }

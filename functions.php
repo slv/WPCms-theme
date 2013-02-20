@@ -2,10 +2,6 @@
 
 /* config */
 
-define('THEME_HASH', 'wpcms');
-define('PRE', 'wpcms_');
-
-
 $role_object = get_role('editor');
 $role_object->add_cap('manage_options');
 

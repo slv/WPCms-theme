@@ -1,5 +1,6 @@
 function WPCmsLoadGoogleFontsScript ()
 {
+    if (!WebFontConfig.google.families.length) return;
     WebFontConfig.google.families.sort();
 
     var wf = document.createElement('script');

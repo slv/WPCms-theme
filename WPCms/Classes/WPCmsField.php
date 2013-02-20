@@ -100,7 +100,7 @@ Abstract Class WPCmsField {
       $meta = '';
     }
 
-    return htmlspecialchars($meta, ENT_QUOTES);
+    return $meta;
   }
 
   public function save ($postID, $suffix = '') {
@@ -193,7 +193,27 @@ Abstract Class WPCmsField {
 
     $field_name = $this->id . $suffix;
 
-    $option = get_option($field_name, $this->default);
+    $option = get_option($field_name, false);
+
+    if ($option)
+      return $option;
+
+    if (is_array($this->default))
+    {
+      if (isset($this->default[trim($suffix, "_")]))
+        $option = $this->default[trim($suffix, "_")];
+      else
+        $option = '';
+    }
+    elseif (isset($this->default))
+    {
+      $option = $this->default;
+    }
+    else
+    {
+
+      $option = '';
+    }
 
     return $option;
   }
@@ -229,12 +249,17 @@ Abstract Class WPCmsField {
   }
 
   public function renderSettingLabel () {
-    echo '<th scope="row">' . $this->name . '</th>';
+    echo '<th scope="row">',
+      '<label for="', $this->id, '">',
+        '<strong>', $this->name, '</strong>',
+        '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;">', $this->description, '</span>',
+      '</label>',
+    '</th>';
   }
 
   public function renderSettingInput () {
 
-    echo '<td>';
+    echo '<td width="75%">';
     $this->renderInnerInput(null, array(
       'id' => $this->id,
       'name' => $this->id,
