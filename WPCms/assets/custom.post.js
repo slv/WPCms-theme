@@ -15,7 +15,7 @@ function slvRemoveImage (image) {
   return false;
 }
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function ($) {
 
   var postFormatSelect = jQuery('#post-formats-select input').change(function (e) {
 
@@ -71,19 +71,32 @@ jQuery(document).ready(function () {
 
   });
 
-  jQuery(".multilingual-switcher.ord-0").addClass('button-primary');
+  $(".wpcms-multilingual-field > div").css({
+    height: function () {
+      var height = 0,
+          add = $(this).children().first().outerHeight();
 
-  jQuery('.multilingual-wrapper').fadeOut(0);
-  jQuery('.multilingual-wrapper.ord-0').fadeIn(0);
+      $(this).find('.multilingual-wrapper').each(function (k, wrap) {
+        height = Math.max($(wrap).outerHeight(), height);
+      });
 
-  jQuery(".multilingual-switcher").click(function (e) {
+      return (height + add);
+    }
+  })
+
+  $(".multilingual-switcher.ord-0").addClass('button-primary');
+
+  $('.multilingual-wrapper').hide();
+  $('.multilingual-wrapper.ord-0').show();
+
+  $(".multilingual-switcher").click(function (e) {
     e.preventDefault();
 
-    jQuery('.multilingual-wrapper').fadeOut(0);
-    jQuery('.multilingual-wrapper.lang-' + jQuery(this).text()).fadeIn(0);
+    $('.multilingual-wrapper').hide();
+    $('.multilingual-wrapper.lang-' + $(this).text()).show();
 
-    jQuery('.multilingual-switcher.button-primary').removeClass('button-primary');
-    jQuery('.multilingual-switcher.lang-' + jQuery(this).text()).addClass('button-primary');
+    $('.multilingual-switcher.button-primary').removeClass('button-primary');
+    $('.multilingual-switcher.lang-' + $(this).text()).addClass('button-primary');
   });
 
 });

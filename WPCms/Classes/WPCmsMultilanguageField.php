@@ -37,7 +37,7 @@ Class WPCmsMultilanguageField {
     $this->field->renderLabel($post);
 
     echo '<td style="width:75%">',
-      '<div style="position:relative;"><div>',
+      '<div class="wpcms-multilingual-field"><div>',
         '<div style="text-align:right;padding:3px;">';
 
     foreach ($this->languages as $k => $lang) {
@@ -142,13 +142,13 @@ Class WPCmsMultilanguageField {
 
   public function renderSetting () {
 
-    $option = $this->settingValue($post->ID);
+    $option = $this->settingValue();
 
     $this->field->willRenderSetting();
     $this->field->renderSettingLabel();
 
     echo '<td style="width:75%">',
-      '<div style="position:relative;height:', ((int)$this->field->height + 30), 'px;"><div style="position:relative;width:100%;height:100%;">',
+      '<div class="wpcms-multilingual-field"><div>',
         '<div style="text-align:right;padding:3px;">';
 
     foreach ($this->languages as $k => $lang) {
@@ -166,7 +166,7 @@ Class WPCmsMultilanguageField {
         'value' => $option[$lang]
       );
 
-      echo '<div class="multilingual-wrapper ord-', $k, ' lang-', $lang, '" style="position:absolute;left:0px;top:30px;width:100%;height:', $this->field->height, 'px;background:#ffffff;">';
+      echo '<div class="multilingual-wrapper ord-', $k, ' lang-', $lang, '" style="background:#ffffff;">';
 
       $this->field->renderInnerInput(null, $data);
 

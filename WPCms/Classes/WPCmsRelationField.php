@@ -2,8 +2,6 @@
 
 Class WPCmsRelationField Extends WPCmsField {
 
-  var $height = 100;
-
   function __construct ($id, $name = '', $description = '', $default = '', $postTypeOfRelated = '')
   {
     $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($id);
@@ -34,10 +32,10 @@ Class WPCmsRelationField Extends WPCmsField {
 
     echo '<div class="multi-select-field">';
 
-    echo '<label>', __('type to filter'), ':</label>',
-      '<input class="multi-select-filter" size="40" />',
-      '<a class="button button-small select-all">Select All</a>',
-      '<a class="button button-small select-none">Select None</a>';
+    echo '<label>', __('Type to Filter'), ':</label>',
+      '<input class="multi-select-filter" size="20" />',
+      '<a class="button button-small select-all">', __('Select'), ' ', __('All'), '</a>',
+      '<a class="button button-small select-none">', __('Deselect'), ' ', __('All'), '</a>';
 
     echo '<div class="options-list" id="', $data['id'], '_wrapper" style="width:100%;height:150px;">';
 

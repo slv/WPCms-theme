@@ -2,8 +2,6 @@
 
 Class WPCmsImageField Extends WPCmsField {
 
-  var $height = 30;
-
   public function addActionAdminEnqueueScripts ($hook)
   {
     wp_enqueue_style('thickbox');

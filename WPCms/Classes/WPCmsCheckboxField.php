@@ -2,8 +2,6 @@
 
 Class WPCmsCheckboxField Extends WPCmsField {
 
-  var $height = 30;
-
   public function renderInnerInput ($post, $data = array()) {
     echo '<input type="checkbox" name="', $data['name'], '" id="', $data['id'], '" value="on"', ($data['value'] == "on" ? ' checked="checked" ' : ''), ' />';
   }

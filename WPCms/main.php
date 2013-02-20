@@ -14,11 +14,15 @@ require_once "Classes/WPCmsTextField.php";
 require_once "Classes/WPCmsTextareaField.php";
 require_once "Classes/WPCmsPasswordField.php";
 require_once "Classes/WPCmsCheckboxField.php";
-require_once "Classes/WPCmsRelationField.php";
+require_once "Classes/WPCmsSelectField.php";
+require_once "Classes/WPCmsRadioField.php";
 
-require_once "Classes/WPCmsSeparatorField.php";
+require_once "Classes/WPCmsGoogleFontsField.php";
+require_once "Classes/WPCmsRelationField.php";
 require_once "Classes/WPCmsColorPicker.php";
 require_once "Classes/WPCmsImageField.php";
+
+require_once "Classes/WPCmsSeparatorField.php";
 
 require_once "Classes/WPCmsPostType.php";
 require_once "Classes/WPCmsSettingsPage.php";
@@ -42,16 +46,25 @@ WPCmsStatus::getStatus()->setData('pre', PRE);
 $txtComuni = new WPCmsSettingsPage(
   'Testi Comuni',
   array(
+      new WPCmsMultilanguageField(
+    new WPCmsGoogleFontsField ('font1', 'Font Titolo 1', 'descrizione font')),
+    new WPCmsRadioField ('selectoption4', 'Opzione da menu a tendina', 'descrizione opzione', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
     new WPCmsSeparatorField ('sep1', 'Separatore Campi'),
-    new WPCmsInputField ('input1', 'Input Numero 1'),
-    new WPCmsTextField ('txt1', 'Testo Numero 1'),
+      new WPCmsMultilanguageField(
+    new WPCmsInputField ('input1', 'Input Numero 1')),
+      new WPCmsMultilanguageField(
+    new WPCmsTextField ('txt1', 'Testo Numero 1')),
     new WPCmsSeparatorField ('sep2', 'Separatore Campi'),
-    new WPCmsTextField ('txt2', 'Testo Numero 2'),
-    new WPCmsColorPicker ('color1', 'Colore Titolo Home'),
-    new WPCmsColorPicker ('color2', 'Colore Titolo Home 2'),
-    new WPCmsColorPicker ('color3', 'Colore Titolo Home 3'),
-    new WPCmsColorPicker ('color4', 'Colore Titolo Home 4'),
-    new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'custom post correlati', '', 'custom-post-type')
+      new WPCmsMultilanguageField(
+    new WPCmsTextField ('txt2', 'Testo Numero 2')),
+      new WPCmsMultilanguageField(
+    new WPCmsColorPicker ('color1', 'Colore Titolo Home')),
+      new WPCmsMultilanguageField(
+    new WPCmsSelectField ('selectoption1', 'Opzione da menu a tendina', 'descrizione opzione', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second')),
+      new WPCmsMultilanguageField(
+    new WPCmsSelectField ('selectoption2', 'Opzione da menu a tendina 2', 'descrizione opzione', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'))),
+      new WPCmsMultilanguageField(
+    new WPCmsRelationField ('custom_post_related', 'Related Custom Posts', 'custom post correlati', '', 'custom-post-type'))
   )
 );
 
@@ -125,12 +138,22 @@ $customPostType = new WPCmsPostType(
       'context' => 'normal',
       'priority' => 'high',
       'fields' => array(
-        new WPCmsCheckboxField('check', 'Attivo questa opzione?'),
-        new WPCmsColorPicker ('color1', 'Colore Titolo Home'),
-        new WPCmsColorPicker ('color2', 'Colore Titolo Home 2'),
-        new WPCmsColorPicker ('color3', 'Colore Titolo Home 3'),
-        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'Articoli correlati', '', 'custom-post-type'),
-        new WPCmsImageField('custom_post_type_image', 'Custom Post Image')
+          new WPCmsMultilanguageField(
+        new WPCmsInputField ('input1', 'Input Numero 1')),
+          new WPCmsMultilanguageField(
+        new WPCmsTextField ('txt1', 'Testo Numero 1')),
+          new WPCmsMultilanguageField(
+        new WPCmsCheckboxField('check', 'Attivo questa opzione?')),
+          new WPCmsMultilanguageField(
+        new WPCmsColorPicker ('color1', 'Colore Titolo Home')),
+          new WPCmsMultilanguageField(
+        new WPCmsSelectField ('selectoption1', 'Opzione da menu a tendina', 'descrizione opzione', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second')),
+          new WPCmsMultilanguageField(
+        new WPCmsSelectField ('selectoption2', 'Opzione da menu a tendina 2', 'descrizione opzione', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'))),
+          new WPCmsMultilanguageField(
+        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'Articoli correlati', '', 'custom-post-type')),
+          new WPCmsMultilanguageField(
+        new WPCmsImageField('custom_post_type_image', 'Custom Post Image'))
       )
     )
   )
@@ -177,7 +200,7 @@ $customPostType2 = new WPCmsPostType(
       'context' => 'normal',
       'priority' => 'high',
       'fields' => array(
-        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'custom post correlati', array(), 'custom-post-type'),
+        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'custom post correlati', '', 'custom-post-type'),
         new WPCmsImageField('custom_post_type_image', 'Custom Post Image'),
         new WPCmsImageField('custom_post_type_image1', 'Custom Post Image'),
         new WPCmsImageField('custom_post_type_image2', 'Custom Post Image'),

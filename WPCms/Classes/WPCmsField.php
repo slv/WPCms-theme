@@ -2,8 +2,6 @@
 
 Abstract Class WPCmsField {
 
-  var $height = 30;
-
   abstract protected function renderInnerInput ($post, $data = array());
 
   function __construct ($id, $name = '', $description = '', $default = '') {
@@ -19,6 +17,11 @@ Abstract Class WPCmsField {
     return preg_replace(array("/(\s+)/", "/([^a-zA-Z0-9_]*)/", "/(_+)/"), array("_", "", "_"), $str);
   }
 
+  public function hyphenizeFromCamelCase ($str) {
+    $str = strtolower(preg_replace("/([A-Z]+)/", "-$1", $str));
+    return preg_replace("/([^A-Za-z-]+)/", "", trim($str, "-"));
+  }
+
   public function addActionAdminEnqueueScripts ($hook) {}
 
   /*
@@ -26,7 +29,7 @@ Abstract Class WPCmsField {
   */
 
   public function willRender ($post) {
-    echo '<table class="form-table">',
+    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), '">',
       '<tr style="border-top:1px solid #eeeeee;">';
   }
 
@@ -221,7 +224,8 @@ Abstract Class WPCmsField {
   }
 
   public function willRenderSetting () {
-    echo '<tr valign="top">';
+    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), '">',
+      '<tr valign="top">';
   }
 
   public function renderSettingLabel () {
@@ -241,7 +245,8 @@ Abstract Class WPCmsField {
 
 
   public function didRenderSetting () {
-    echo '</tr>';
+    echo '</tr>',
+      '</table>';
   }
 
 };

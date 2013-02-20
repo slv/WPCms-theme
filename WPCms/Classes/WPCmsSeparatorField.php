@@ -2,8 +2,6 @@
 
 Class WPCmsSeparatorField Extends WPCmsField {
 
-  var $height = 30;
-
   public function renderInnerInput ($post, $data = array()) {
     echo '<h3 style="background:#eeeeee;border-top:1px solid #b0b0b0;line-height:40px;">' . $this->name . '</h3>';
   }
@@ -56,8 +54,9 @@ Class WPCmsSeparatorField Extends WPCmsField {
   }
 
   public function willRenderSetting () {
-    echo '<tr valign="middle">',
-      '<td colspan="2">';
+    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), '">',
+      '<tr valign="middle">',
+    '<td colspan="2">';
   }
 
   public function renderSettingLabel () {}
@@ -65,7 +64,8 @@ Class WPCmsSeparatorField Extends WPCmsField {
 
   public function didRenderSetting () {
     echo '</td>',
-      '</tr>';
+      '</tr>',
+    '</table>';
   }
 
 };
