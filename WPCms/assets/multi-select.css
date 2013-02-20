@@ -1,3 +1,14 @@
+.multi-select-field {
+  padding:1px;
+  border:1px solid #a0a0a0;
+  border-radius:7px;
+  background:#ededed; }
+
+.multi-select-field .multi-select-tools {
+  padding:5px;
+  font-weight:bold;
+  border-radius:7px 7px 0px 0px; }
+
 .multi-select-field label {
   padding:0px 5px;
   line-height:20px;
@@ -5,6 +16,7 @@
   color:#303030; }
 
 .multi-select-field .multi-select-filter {
+  margin:0px 5px;
   padding:0px 5px;
   line-height:20px;
   font-size:13px;
@@ -13,17 +25,20 @@
 .multi-select-field .options-list {
   position:relative;
   overflow-y:scroll;
-  margin:10px 0px;
-  border:1px solid #a0a0a0;
-  border-radius:7px; }
+  padding:5px 0px;
+  box-shadow:inset 0px 0px 3px #808080;
+  -moz-box-shadow:inset 0px 0px 3px #808080;
+  -webkit-box-shadow:inset 0px 0px 3px #808080;
+  border-radius:7px;
+  background:#ffffff; }
 
 .multi-select-field .options-list > a {
   position:relative;
   display:block;
-  margin:3px;
+  margin:4px 8px;
   padding:2px 5px;
-  height:20px;
-  line-height:20px;
+  height:18px;
+  line-height:18px;
   font-size:13px;
   color:#303030;
   border:1px solid #585858;
