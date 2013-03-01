@@ -211,3 +211,34 @@ $customPostType2->setLabels(array(
 $customPostType2->register();
 
 WPCmsStatus::getStatus()->addToArray('postTypeInstances', $customPostType2);
+
+
+
+
+
+// Exclude pages from search
+
+function filterPostTypeInstances ($postType)
+{
+  return (!$postType->args['exclude_from_search'] && 1);
+}
+
+function mapPostTypeInstances ($postType)
+{
+  return $postType->post_type;
+}
+
+
+function postTypeSearchFilter ($query) {
+  if ($query->is_search && $query->get('post_type') == '') {
+    $searchPostTypes = array_map('mapPostTypeInstances', array_filter(WPCmsStatus::getStatus()->getArray('postTypeInstances'), 'filterPostTypeInstances'));
+    $searchPostTypes[] = 'post';
+
+    $query->set('post_type', $searchPostTypes);
+  }
+  return $query;
+}
+add_filter('pre_get_posts', 'postTypeSearchFilter');
+
+
+
