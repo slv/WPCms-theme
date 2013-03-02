@@ -160,30 +160,6 @@ Class WPCmsPostType {
 
   function add_meta_boxes () {
 
-    if (in_array('postId', $this->args['supports'])) {
-      add_meta_box(
-        'custom-render-post-id',
-        'Post ID',
-        array($this, 'render_post_ID'),
-        $this->post_type,
-        'normal',
-        'high'
-      );
-    }
-    if (in_array('media', $this->args['supports'])) {
-      add_meta_box(
-        'custom-media-upload',
-        'Media Upload',
-        array($this, 'render_media_upload'),
-        $this->post_type,
-        'normal',
-        'high'
-      );
-      wp_enqueue_script('media-upload');
-      wp_enqueue_script('thickbox');
-      wp_enqueue_style('thickbox');
-    }
-
     foreach ($this->custom_fields as $id => $field) {
       $field = array_merge(array(
         'title' => 'Custom Fields',
@@ -202,25 +178,6 @@ Class WPCmsPostType {
     }
   }
 
-  function render_post_ID ($post) {
-    echo '<table class="form-table">',
-        '<tr style="border-top:1px solid #eeeeee;">',
-          '<th style="width:25%">',
-          '<label>',
-            '<strong>Post ID & URL</strong>',
-            '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;"></span>',
-          '</label>',
-          '</th>',
-          '<td style="width:10%">',
-            '<input type="text" size="5" value="', $post->ID, '" />',
-          '</td>',
-          '<td style="width:65%">',
-            the_permalink($post->ID),
-          '</td>',
-        '</tr>',
-      '</table>';
-  }
-
   function render_meta_box ($post, $args)
   {
     foreach ($this->custom_fields[$args['id']]['fields'] as $field) {
@@ -229,37 +186,11 @@ Class WPCmsPostType {
     }
   }
 
-  function render_media_upload ($post) {
-    echo '<table class="form-table">',
-        '<tr style="border-top:1px solid #eeeeee;">',
-          '<th style="width:25%">',
-          '<label>',
-            '<strong>Media Upload</strong>',
-            '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;"></span>',
-          '</label>',
-          '</th>',
-          '<td style="width:75%">',
-            '<a href="' . admin_url() . 'media-upload.php?post_id=' . $post->ID . '&tab=gallery&TB_iframe=1&width=640&height=919" class="thickbox add_media" id="content-add_media" title="Add Media" onclick="set_send(\'#media-gallery-cont' . $post->ID . '\'); return false;">Upload/Insert <img src="' . admin_url() . 'images/media-button.png" width="15" height="15"></a>',
-          '</td>',
-        '</tr>',
-        '<tr>',
-          '<td colspan="2" id="media-gallery-cont' . $post->ID . '" style="background:#888;">';
-
-    $attachments = get_posts(array('post_type' => 'attachment', 'orderby' => 'menu_order', 'order' => 'ASC', 'posts_per_page' => -1, 'post_parent' => $post->ID, 'exclude' => get_post_thumbnail_id()));
-    if (count($attachments)) foreach ($attachments as $att) {
-      if (wp_attachment_is_image($att->ID)) echo wp_get_attachment_image($att->ID, array(100, 100), true, array('style' => 'margin:5px;'));
-    }
-
-    echo '</td>',
-        '</tr>',
-      '</table>';
-  }
-
   function admin_post_page_js ($hook) {
 
     if ($hook == 'post.php' || $hook == 'post-new.php') {
-      wp_register_script('custom-post-admin-javascript', get_template_directory_uri() . '/WPCms/assets/custom.post.js', 'jquery');
-      wp_enqueue_script('custom-post-admin-javascript');
+      wp_register_script('wpcms-custompost', get_template_directory_uri() . '/WPCms/assets/custom.post.js', 'jquery');
+      wp_enqueue_script('wpcms-custompost');
       wp_dequeue_script('autosave');
     }
   }

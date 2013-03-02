@@ -35,8 +35,8 @@ Class WPCmsSettingsPage {
 
     if ($hook == $this->slug) {
 
-      wp_register_script('custom-post-admin-javascript', get_template_directory_uri() . '/WPCms/assets/custom.post.js', 'jquery');
-      wp_enqueue_script('custom-post-admin-javascript');
+      wp_register_script('wpcms-custompost', get_template_directory_uri() . '/WPCms/assets/custom.post.js', 'jquery');
+      wp_enqueue_script('wpcms-custompost');
 
       foreach ($this->fields as $k => $field) {
 

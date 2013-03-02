@@ -13,12 +13,14 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
 
   public function addActionAdminEnqueueScripts ($hook)
   {
-    wp_enqueue_script('wpcms-googlefonts', get_template_directory_uri() . '/WPCms/assets/google-fonts.js', array('jquery'));
+    wp_enqueue_script('wpcms-googlefonts', get_template_directory_uri() . '/WPCms/assets/google.fonts.js', array('jquery'));
   }
 
   public function renderInnerInput ($post, $data = array()) {
 
     // List from: https://developers.google.com/apis-explorer/#p/webfonts/v1/webfonts.webfonts.list?sort=trending&_h=1&
+    // $fonts = json_decode(file_get_contents(..google api response..), true);
+    // foreach ($fonts['items'] as $key => $value) { foreach ($value['variants'] as $variant) { echo $value['family'] . ':' . $variant . PHP_EOL; }}
 
     echo '<div class="field-wrapper">';
     echo '<p class="demo">', ($data['value'] != '' ? $data['value'] : 'Font: ' . __('Default')), '</p>';

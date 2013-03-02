@@ -181,11 +181,17 @@ $customPostType2 = new WPCmsPostType(
     'shared' => array(
       'title' => 'Dati Aggiuntivi',
       'fields' => array(
-        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'custom post correlati', '', 'custom-post-type'),
+        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'related...', '', 'custom-post-type'),
         new WPCmsImageField('custom_post_type_image', 'Custom Post Image'),
         new WPCmsImageField('custom_post_type_image1', 'Custom Post Image'),
         new WPCmsImageField('custom_post_type_image2', 'Custom Post Image'),
         new WPCmsImageField('custom_post_type_image3', 'Custom Post Image')
+      )
+    ),
+    'wpcms-format-image' => array(
+      'title' => 'Custom Fields for Post Format image',
+      'fields' => array(
+        new WPCmsInputField ('test112', 'Input available only for post format Image')
       )
     )
   )
@@ -196,7 +202,8 @@ $customPostType2->setArgs(array(
     'supports' => array(
       'title',
       'editor',
-      'thumbnail'
+      'thumbnail',
+      'post-formats'
     )
 ));
 
@@ -213,6 +220,19 @@ $customPostType2->register();
 WPCmsStatus::getStatus()->addToArray('postTypeInstances', $customPostType2);
 
 
+$postType = new WPCmsPostType(
+  'post',
+  array(
+    'wpcms-format-image' => array(
+      'title' => 'Custom Fields for Post Format image',
+      'fields' => array(
+        new WPCmsInputField ('test111', 'Input available only for post format Image')
+      )
+    )
+  )
+);
+
+$postType->register();
 
 
 
