@@ -29,7 +29,7 @@ Abstract Class WPCmsField {
   */
 
   public function willRender ($post) {
-    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), '">',
+    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), ' ', $this->id,'-wrapper">',
       '<tr style="border-top:1px solid #eeeeee;">';
   }
 
@@ -244,7 +244,7 @@ Abstract Class WPCmsField {
   }
 
   public function willRenderSetting () {
-    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), '">',
+    echo '<table class="form-table wpcms-field ', $this->hyphenizeFromCamelCase(get_class($this)), ' ', $this->id,'-wrapper">',
       '<tr valign="top">';
   }
 

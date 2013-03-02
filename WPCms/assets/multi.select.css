@@ -1,5 +1,5 @@
 .multi-select-field {
-  padding:1px;
+  padding:8px;
   border:1px solid #a0a0a0;
   border-radius:7px;
   background:#ededed; }
@@ -25,6 +25,7 @@
 .multi-select-field .options-list {
   position:relative;
   overflow-y:scroll;
+  margin-top:4px;
   padding:5px 0px;
   box-shadow:inset 0px 0px 3px #808080;
   -moz-box-shadow:inset 0px 0px 3px #808080;
@@ -34,6 +35,7 @@
 
 .multi-select-field .options-list > a {
   position:relative;
+  overflow:hidden;
   display:block;
   margin:4px 8px;
   padding:2px 5px;
@@ -45,6 +47,20 @@
   border-radius:4px;
   background:#dedede;
   text-decoration:none; }
+
+.multi-select-field .options-list > a > span {
+  position:absolute;
+  right:0px;
+  top:0px;
+  padding:0px 5px;
+  line-height:11px;
+  font-size:10px;
+  text-align:right;
+  border-radius:4px;
+  color:#ffffff;
+  background:#000000;
+  background:rgba(0, 0, 0, 0.6); }
+
 
 .multi-select-field .options-list > a:hover {
   background:#ededed; }

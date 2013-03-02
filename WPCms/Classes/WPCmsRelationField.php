@@ -24,11 +24,19 @@ Class WPCmsRelationField Extends WPCmsField {
     if ($data['value'] == '') $data['value'] = $this->default;
     $values = explode(',', (string)$data['value']);
 
-    $posts = get_posts(array(
-      'numberposts' => -1,
-      'orderby' => 'post_date',
-      'order' => 'DESC',
-      'post_type' => $this->postTypeOfRelated != '' ? $this->postTypeOfRelated : $post->post_type));
+    if ($this->postTypeOfRelated == 'page') {
+      $posts = get_pages(array(
+        'sort_column' => 'post_date',
+        'sort_order' => 'DESC'));
+    }
+    else {
+      $posts = get_posts(array(
+        'numberposts' => -1,
+        'orderby' => 'post_date',
+        'order' => 'DESC',
+        'post_status' => 'any',
+        'post_type' => $this->postTypeOfRelated != '' ? $this->postTypeOfRelated : $post->post_type));
+    }
 
     echo '<div class="multi-select-field">';
 
@@ -40,7 +48,7 @@ Class WPCmsRelationField Extends WPCmsField {
     echo '<div class="options-list" id="', $data['id'], '_wrapper" style="width:100%;height:150px;">';
 
     foreach ($posts as $p) {
-      echo '<a href="', $p->ID, '"', (in_array($p->ID, $values) ? ' class="selected"' : ''), '>', $p->post_title, ' (', $p->post_status, ', ', $p->post_date, ')</a>';
+      echo '<a href="', $p->ID, '"', (in_array($p->ID, $values) ? ' class="selected"' : ''), '>', $p->post_title, ' <span>', $p->post_date, '<br />', $p->post_status, '</span></a>';
     }
 
     echo '</div>';
