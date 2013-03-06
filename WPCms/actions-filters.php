@@ -1,20 +1,23 @@
 <?php
 
-/* Options Retriever */
+// Options Retriever
+
 function _o($label, $default = '') {
-  if (!defined('PRE'))
-    return 'constant PRE not defined';
 
-  return get_option(PRE . $label, $default);
+  return get_option(WPCmsStatus::getStatus()->getData('pre') . $label, $default);
 }
 
-function _m($postID, $label) {
-  if (!defined('PRE'))
-    return 'constant PRE not defined';
+function _m($label, $postID = false) {
+  if (!$postID) $postID = get_the_ID();
 
-  return get_post_meta($postID, PRE . $label, true);
+  return get_post_meta($postID, WPCmsStatus::getStatus()->getData('pre') . $label, true);
 }
 
-/* To enable $_FILES variable */
-function update_edit_form () { echo ' enctype="multipart/form-data"'; }
+
+// To enable $_FILES variable
+
+function update_edit_form () {
+  echo ' enctype="multipart/form-data"';
+}
+
 add_action('post_edit_form_tag', 'update_edit_form');

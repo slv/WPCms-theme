@@ -11,6 +11,18 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
     return $this;
   }
 
+  static function printGoogleFontsLink ($font, $cssSelector = 'body')
+  {
+    echo "<link href='http://fonts.googleapis.com/css?family=" . $font . "' rel='stylesheet' type='text/css'>" . PHP_EOL .
+    "<style type=\"text/css\">" . $cssSelector . "{ font-family: '" .
+    array_shift(explode(':', _o('main_font'))) .
+    "'; font-weight:" .
+    preg_replace(array("/^(regular|italic)$/", "/^(\d*)(italic)$/"), array("400", "$1"), array_pop(explode(':', _o('main_font')))) .
+    "; font-style:" .
+    preg_replace(array("/^(\d*)(.*)/", "/regular/"), array("$2", "normal"), array_pop(explode(':', _o('main_font')))) .
+    "; }</style>" . PHP_EOL;
+  }
+
   public function addActionAdminEnqueueScripts ($hook)
   {
     wp_enqueue_script('wpcms-googlefonts', get_template_directory_uri() . '/WPCms/assets/google.fonts.js', array('jquery'));
