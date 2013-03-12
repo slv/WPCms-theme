@@ -47,8 +47,7 @@ WPCmsStatus::getStatus()->setData('pre', 'wpcms_');
 // Settings Page
 //
 
-$txtComuni = new WPCmsSettingsPage(
-  'Testi Comuni',
+$txtComuni = new WPCmsSettingsPage('Testi Comuni', 'testi_comuni',
   array(
     new WPCmsSeparatorField ('separator1', 'WPCmsSeparatorField 1', 'Example of WPCmsSeparatorField'),
     new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),

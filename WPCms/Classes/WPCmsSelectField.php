@@ -16,7 +16,7 @@ Class WPCmsSelectField Extends WPCmsField {
     echo '<select type="text" name="', $data['name'], '" id="', $data['id'], '">';
 
     if ($data['value'] == '' && !isset($this->options[$default]))
-      echo '<option value="">', __('Select'),'...</option>';
+      echo '<option value="">', __('Select', WPCmsStatus::getStatus()->getData('textdomain')),'...</option>';
 
     foreach ($this->options as $value => $label) {
       $selected = ($value == $data['value'] ? ' selected="selected"' : '');

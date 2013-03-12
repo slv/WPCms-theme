@@ -36,8 +36,8 @@ Abstract Class WPCmsField {
   public function renderLabel ($post) {
     echo '<th style="width:25%">',
       '<label for="', $this->id, '">',
-        '<strong>', $this->name, '</strong>',
-        '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;">', $this->description, '</span>',
+        '<strong>', __($this->name, WPCmsStatus::getStatus()->getData('textdomain')), '</strong>',
+        '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;">', __($this->description, WPCmsStatus::getStatus()->getData('textdomain')), '</span>',
       '</label>',
       '</th>';
   }
@@ -110,7 +110,7 @@ Abstract Class WPCmsField {
     $field_name = $this->id . $suffix;
 
     $old = get_post_meta($postID, $field_name, true);
-    $new = $_POST[$field_name];
+    $new = isset($_POST[$field_name]) ? $_POST[$field_name] : false;
 
     if ($new && $new != $old) {
 
@@ -251,8 +251,8 @@ Abstract Class WPCmsField {
   public function renderSettingLabel () {
     echo '<th scope="row">',
       '<label for="', $this->id, '">',
-        '<strong>', $this->name, '</strong>',
-        '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;">', $this->description, '</span>',
+        '<strong>', __($this->name, WPCmsStatus::getStatus()->getData('textdomain')), '</strong>',
+        '<span style=" display:block; color:#999; margin:5px 0 0 0; line-height: 18px;">', __($this->description, WPCmsStatus::getStatus()->getData('textdomain')), '</span>',
       '</label>',
     '</th>';
   }

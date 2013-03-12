@@ -40,10 +40,10 @@ Class WPCmsRelationField Extends WPCmsField {
 
     echo '<div class="multi-select-field">';
 
-    echo '<label>', __('Type to Filter'), ':</label>',
+    echo '<label>', __('Type to Filter', WPCmsStatus::getStatus()->getData('textdomain')), ':</label>',
       '<input class="multi-select-filter" size="20" />',
-      '<a class="button button-small select-all">', __('Select'), ' ', __('All'), '</a>',
-      '<a class="button button-small select-none">', __('Deselect'), ' ', __('All'), '</a>';
+      '<a class="button button-small select-all">', __('Select All', WPCmsStatus::getStatus()->getData('textdomain')), '</a>',
+      '<a class="button button-small select-none">', __('Deselect All', WPCmsStatus::getStatus()->getData('textdomain')), '</a>';
 
     echo '<div class="options-list" id="', $data['id'], '_wrapper" style="width:100%;height:150px;">';
 

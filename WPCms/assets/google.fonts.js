@@ -23,7 +23,7 @@ function WPCmsRenderFonts (k, field)
         }
 
         jQuery(field).find('.demo').css({
-            fontSize: 16,
+            fontSize: function () { var s = parseInt(jQuery(this).attr('data-fontsize')) || 16; return s; },
             lineHeight: '20px',
             fontFamily: select.val().split(':').shift(),
             fontWeight: WPCmsFontStyles[select.val().split(':').pop()][0],

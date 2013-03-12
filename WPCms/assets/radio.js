@@ -15,8 +15,8 @@ jQuery(document).ready(function ($) {
         $('.wpcms_' + id + '-wrapper').hide();
       });
 
-      if (typeof relations[$(field).find('input:radio').val()] != "undefined")
-        $.each(relations[$(field).find('input:radio').val()], function (k, id) {
+      if ($(field).find('input:radio:checked').length)
+        $.each(relations[$(field).find('input:radio:checked').val()], function (k, id) {
           $('.wpcms_' + id + '-wrapper').show();
         });
 

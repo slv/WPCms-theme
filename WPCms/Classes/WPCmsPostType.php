@@ -6,20 +6,21 @@ Class WPCmsPostType {
 
     $this->post_type = $post_type;
     $this->custom_fields = $custom_fields;
+    $td = WPCmsStatus::getStatus()->getData('textdomain');
 
     $labels = array(
-      'name' => __('Custom Items'),
-      'singular_name' => __('Custom Item'),
-      'add_new' => __('Add New'),
-      'add_new_item' => __('Add New Item'),
-      'edit_item' => __('Edit Item'),
-      'new_item' => __('New Item'),
-      'view_item' => __('View Item'),
-      'search_items' => __('Search Items'),
-      'not_found' =>  __('No items found'),
-      'not_found_in_trash' => __('No items found in Trash'),
+      'name' => __('Custom Items', $td),
+      'singular_name' => __('Custom Item', $td),
+      'add_new' => __('Add New', $td),
+      'add_new_item' => __('Add New Item', $td),
+      'edit_item' => __('Edit Item', $td),
+      'new_item' => __('New Item', $td),
+      'view_item' => __('View Item', $td),
+      'search_items' => __('Search Items', $td),
+      'not_found' =>  __('No items found', $td),
+      'not_found_in_trash' => __('No items found in Trash', $td),
       'parent_item_colon' => '',
-      'menu_name' => __('Custom Items')
+      'menu_name' => __('Custom Items', $td)
     );
 
     $args = array(
@@ -161,20 +162,25 @@ Class WPCmsPostType {
   function add_meta_boxes () {
 
     foreach ($this->custom_fields as $id => $field) {
-      $field = array_merge(array(
-        'title' => 'Custom Fields',
-        'context' => 'normal',
-        'priority' => 'high'), $field);
 
-      add_meta_box(
-        $id,
-        $field['title'],
-        array($this, 'render_meta_box'),
-        $this->post_type,
-        $field['context'],
-        $field['priority'],
-        array('id' => $id)
-      );
+      $post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : false);
+      if (!isset($field['template-file']) || $post_id && get_post_meta($post_id, '_wp_page_template', true) == $field['template-file'])
+      {
+        $field = array_merge(array(
+          'title' => __('Custom Fields', WPCmsStatus::getStatus()->getData('textdomain')),
+          'context' => 'normal',
+          'priority' => 'high'), $field);
+
+        add_meta_box(
+          $id,
+          $field['title'],
+          array($this, 'render_meta_box'),
+          $this->post_type,
+          $field['context'],
+          $field['priority'],
+          array('id' => $id)
+        );
+      }
     }
   }
 

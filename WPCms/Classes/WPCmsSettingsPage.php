@@ -2,11 +2,12 @@
 
 Class WPCmsSettingsPage {
 
-  function __construct($title = 'Untitled', $fields = array(), $parentSlug = null) {
+  function __construct($title = 'Untitled', $menu_slug = '', $fields = array(), $parentSlug = null) {
 
     $this->title = $title;
     $this->fields = $fields;
     $this->parentSlug = $parentSlug;
+    $this->slug = $menu_slug;
     $this->capabilityType = 'manage_options';
 
     $this->options_group = $this->hash($this->title);
@@ -16,11 +17,18 @@ Class WPCmsSettingsPage {
     add_action('admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts'), 10, 1);
   }
 
-  public function hash ($str) {
+  public function getMenuSlug ()
+  {
+    return $this->normalize($this->slug);
+  }
+
+  public function hash ($str)
+  {
     return md5($str);
   }
 
-  public function normalize ($str) {
+  public function normalize ($str)
+  {
     return preg_replace(array("/(\s+)/", "/([^a-zA-Z0-9_]*)/", "/(_+)/"), array("_", "", "_"), $str);
   }
 
@@ -50,13 +58,13 @@ Class WPCmsSettingsPage {
     if ($this->parentSlug)
     {
       $this->slug = add_submenu_page($this->parentSlug,
-        $this->title, $this->title, $this->capabilityType, $this->normalize($this->title), array($this, 'settingsPage')
+        $this->title, $this->title, $this->capabilityType, $this->getMenuSlug(), array($this, 'settingsPage')
       );
     }
     else
     {
       $this->slug = add_menu_page(
-        $this->title, $this->title, $this->capabilityType, $this->normalize($this->title), array($this, 'settingsPage')
+        $this->title, $this->title, $this->capabilityType, $this->getMenuSlug(), array($this, 'settingsPage')
       );
     }
   }
@@ -70,15 +78,12 @@ Class WPCmsSettingsPage {
       settings_fields($this->options_group);
       do_settings_fields($this->options_group, 'options-general.php');
 
-      echo '<table class="form-table">';
-
       foreach ($this->fields as $k => $field) {
 
         $field->renderSetting();
       }
 
-      echo '</table>',
-          '</div>',
+      echo '</div>',
         '</div>',
         '<p class="submit">',
           '<input type="submit" class="button-primary" value="' . __('Save Changes') . '" />',
