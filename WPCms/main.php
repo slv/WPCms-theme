@@ -21,6 +21,7 @@ require_once "Classes/WPCmsRadioField.php";
 require_once "Classes/WPCmsGoogleFontsField.php";
 require_once "Classes/WPCmsRelationField.php";
 require_once "Classes/WPCmsColorPicker.php";
+require_once "Classes/WPCmsUploadField.php";
 require_once "Classes/WPCmsImageField.php";
 
 require_once "Classes/WPCmsSeparatorField.php";

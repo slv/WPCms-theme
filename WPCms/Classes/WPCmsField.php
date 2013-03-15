@@ -114,7 +114,9 @@ Abstract Class WPCmsField {
 
     if ($new && $new != $old) {
 
-      update_post_meta($postID, $field_name, htmlspecialchars($new));
+      if (get_magic_quotes_gpc()) $new = stripslashes($new);
+
+      update_post_meta($postID, $field_name, $new);
     }
     elseif ('' == $new && $old) {
 
