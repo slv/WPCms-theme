@@ -23,6 +23,7 @@ require_once "Classes/WPCmsRelationField.php";
 require_once "Classes/WPCmsColorPicker.php";
 require_once "Classes/WPCmsUploadField.php";
 require_once "Classes/WPCmsImageField.php";
+require_once "Classes/WPCmsGoogleMapField.php";
 
 require_once "Classes/WPCmsSeparatorField.php";
 
@@ -71,6 +72,7 @@ $txtComuni = new WPCmsSettingsPage('Testi Comuni', 'testi_comuni',
     new WPCmsGoogleFontsField ('googlefonts1', 'WPCmsGoogleFontsField 1', 'Example of WPCmsGoogleFontsField'),
     new WPCmsGoogleFontsField ('googlefonts2', 'WPCmsGoogleFontsField 2', 'Example of WPCmsGoogleFontsField with default value', 'Roboto:300'),
     new WPCmsImageField ('image1', 'WPCmsImageField 1', 'Example of WPCmsImageField'),
+    new WPCmsGoogleMapField ('gmap1', 'WPCmsGoogleMapField 1', 'Example of WPCmsGoogleMapField'),
     new WPCmsSeparatorField ('separator2', 'WPCmsMultilanguageField Fields:', 'Every fields can be added as "multillanguage" simply passing it as unique parameter of WPCmsMultilanguageField constructor<br />
       for example the first of following fields is:<br />
       new WPCmsMultilanguageField(new WPCmsInputField (\'input2\', \'WPCmsInputField 2\', \'Example of WPCmsInputField in a multilanguage context\'));'),
