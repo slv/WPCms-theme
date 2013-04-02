@@ -13,7 +13,7 @@ Class WPCmsColorPicker Extends WPCmsField {
   public function renderInnerInput ($post, $data = array())
   {
     echo '<div class="farbtastic-colorpicker">';
-    echo '<input type="text" name="', $data['name'], '" id="', $data['id'], '" value="', $data['value'], '" size="30" />';
+    echo '<input type="text" name="', $data['name'], '" id="', $data['id'], '" value="', esc_attr($data['value']), '" size="30" />';
     echo '<div></div>';
     echo '</div>';
   }

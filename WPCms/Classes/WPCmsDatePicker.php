@@ -11,7 +11,7 @@ Class WPCmsDatePicker Extends WPCmsField {
   public function renderInnerInput ($post, $data = array())
   {
     echo '<div class="jquery-ui-datepicker">';
-    echo '<input type="text" name="', $data['name'], '" id="', $data['id'], '" value="', $data['value'], '" size="30" />';
+    echo '<input type="text" name="', $data['name'], '" id="', $data['id'], '" value="', esc_attr($data['value']), '" size="30" />';
     echo '<div></div>';
     echo '<script>jQuery(document).ready(function ($) { $("#', $data['id'], '").datepicker({numberOfMonths: 3, showWeek: 0, autoSize: 0}); });</script>';
     echo '</div>';

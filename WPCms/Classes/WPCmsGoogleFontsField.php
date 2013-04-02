@@ -78,7 +78,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
       $f = array_shift(explode(':', $font));
 
       $selected = ($font == $data['value'] ? ' selected="selected"' : '');
-      echo '<option ', $selected,' value="', $font, '" data-font="', urlencode($families[$f]), '">', $font, '</option>';
+      echo '<option ', $selected,' value="', esc_attr($font), '" data-font="', urlencode($families[$f]), '">', $font, '</option>';
     }
 
     echo '</select>';

@@ -10,7 +10,7 @@ Class WPCmsGoogleMapField Extends WPCmsField {
   public function renderInnerInput ($post, $data = array())
   {
     echo '<div class="gmap">';
-    echo '<input type="hidden" name="', $data['name'], '" id="', $data['id'], '" value="', $data['value'], '" size="30" />';
+    echo '<input type="hidden" name="', $data['name'], '" id="', $data['id'], '" value="', esc_attr($data['value']), '" size="30" />';
     echo '<div style="width:400px;height:300px;border:8px solid #eeeeee;border-radius:8px;" id="gmap-' . $data['id'] . '"></div>';
 
 ?>

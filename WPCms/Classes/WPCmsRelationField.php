@@ -52,7 +52,7 @@ Class WPCmsRelationField Extends WPCmsField {
     }
 
     echo '</div>';
-    echo '<input type="hidden" value="', $data['value'], '" class="input" id="', $data['id'], '" name="', $data['name'], '" />';
+    echo '<input type="hidden" value="', esc_attr($data['value']), '" class="input" id="', $data['id'], '" name="', $data['name'], '" />';
 
     echo '</div>';
 

@@ -21,7 +21,7 @@ Class WPCmsSelectField Extends WPCmsField {
     foreach ($this->options as $value => $label) {
       $selected = ($value == $data['value'] ? ' selected="selected"' : '');
 
-      echo '<option ', $selected,' value="', htmlentities($value), '">', htmlentities($label), '</option>';
+      echo '<option ', $selected,' value="', esc_attr($value), '">', htmlentities($label), '</option>';
     }
 
     echo '</select>';
