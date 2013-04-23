@@ -5,7 +5,7 @@ Class WPCmsUploadField Extends WPCmsField {
   public function addActionAdminEnqueueScripts ($hook)
   {
     wp_enqueue_style('thickbox');
-    wp_enqueue_script('wpcms-upload', get_template_directory_uri() . '/WPCms/assets/upload.js', array('jquery', 'media-upload', 'thickbox'));
+    wp_enqueue_script('wpcms-upload', WPCMS_STYLESHEET_DIR . '/WPCms/assets/upload.js', array('jquery', 'media-upload', 'thickbox'));
   }
 
   public function renderInnerInput ($post, $data = array())

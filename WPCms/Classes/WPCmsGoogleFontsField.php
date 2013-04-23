@@ -46,7 +46,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
 
   public function addActionAdminEnqueueScripts ($hook)
   {
-    wp_enqueue_script('wpcms-googlefonts', get_template_directory_uri() . '/WPCms/assets/google.fonts.js', array('jquery'));
+    wp_enqueue_script('wpcms-googlefonts', WPCMS_STYLESHEET_DIR . '/WPCms/assets/google.fonts.js', array('jquery'));
   }
 
   public function renderInnerInput ($post, $data = array()) {
@@ -61,7 +61,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
     if ($data['value'] == '' && !isset($this->options[$this->default]))
       echo '<option value="">', __('Select', WPCmsStatus::getStatus()->getData('textdomain')),'...</option>';
 
-    $fonts = file_get_contents(get_template_directory() . '/WPCms/assets/google.fonts.list');
+    $fonts = file_get_contents(WPCMS_STYLESHEET_DIR . '/WPCms/assets/google.fonts.list');
     $fonts = explode(PHP_EOL, $fonts);
     $families = array();
 

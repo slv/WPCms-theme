@@ -195,7 +195,7 @@ Class WPCmsPostType {
   function admin_post_page_js ($hook) {
 
     if ($hook == 'post.php' || $hook == 'post-new.php') {
-      wp_register_script('wpcms-custompost', get_template_directory_uri() . '/WPCms/assets/custom.post.js', 'jquery');
+      wp_register_script('wpcms-custompost', WPCMS_STYLESHEET_DIR . '/WPCms/assets/custom.post.js', 'jquery');
       wp_enqueue_script('wpcms-custompost');
       wp_dequeue_script('autosave');
     }

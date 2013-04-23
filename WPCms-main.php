@@ -1,36 +1,41 @@
 <?php
 
+// Config
+
+define ('IS_CHILD_THEME', false);
+define ('WPCMS_STYLESHEET_DIR', (IS_CHILD_THEME ? get_stylesheet_directory_uri() : get_template_directory_uri()));
+
 //
 // Requires
 //
 
-require_once "Singleton/WPCmsStatus.php";
+require_once "WPCms/Singleton/WPCmsStatus.php";
 
-require_once "Classes/WPCmsField.php";
-require_once "Classes/WPCmsMultilanguageField.php";
+require_once "WPCms/Classes/WPCmsField.php";
+require_once "WPCms/Classes/WPCmsMultilanguageField.php";
 
-require_once "Classes/WPCmsInputField.php";
-require_once "Classes/WPCmsTextField.php";
-require_once "Classes/WPCmsTextareaField.php";
-require_once "Classes/WPCmsTinyMCEField.php";
-require_once "Classes/WPCmsPasswordField.php";
-require_once "Classes/WPCmsCheckboxField.php";
-require_once "Classes/WPCmsSelectField.php";
-require_once "Classes/WPCmsRadioField.php";
+require_once "WPCms/Classes/WPCmsInputField.php";
+require_once "WPCms/Classes/WPCmsTextField.php";
+require_once "WPCms/Classes/WPCmsTextareaField.php";
+require_once "WPCms/Classes/WPCmsTinyMCEField.php";
+require_once "WPCms/Classes/WPCmsPasswordField.php";
+require_once "WPCms/Classes/WPCmsCheckboxField.php";
+require_once "WPCms/Classes/WPCmsSelectField.php";
+require_once "WPCms/Classes/WPCmsRadioField.php";
 
-require_once "Classes/WPCmsGoogleFontsField.php";
-require_once "Classes/WPCmsRelationField.php";
-require_once "Classes/WPCmsColorPicker.php";
-require_once "Classes/WPCmsUploadField.php";
-require_once "Classes/WPCmsImageField.php";
-require_once "Classes/WPCmsGoogleMapField.php";
+require_once "WPCms/Classes/WPCmsGoogleFontsField.php";
+require_once "WPCms/Classes/WPCmsRelationField.php";
+require_once "WPCms/Classes/WPCmsColorPicker.php";
+require_once "WPCms/Classes/WPCmsUploadField.php";
+require_once "WPCms/Classes/WPCmsImageField.php";
+require_once "WPCms/Classes/WPCmsGoogleMapField.php";
 
-require_once "Classes/WPCmsSeparatorField.php";
+require_once "WPCms/Classes/WPCmsSeparatorField.php";
 
-require_once "Classes/WPCmsPostType.php";
-require_once "Classes/WPCmsSettingsPage.php";
+require_once "WPCms/Classes/WPCmsPostType.php";
+require_once "WPCms/Classes/WPCmsSettingsPage.php";
 
-require_once "actions-filters.php";
+require_once "WPCms/actions-filters.php";
 
 //
 // Global Config saved in WPCmsStatus Singleton
@@ -57,7 +62,7 @@ $txtComuni = new WPCmsSettingsPage('Testi Comuni', 'testi_comuni',
     new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
     new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
     new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
-    new WPCmsCheckboxField('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
+    new WPCmsCheckboxField ('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
     new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
     new WPCmsColorPicker ('colorpicker2', 'WPCmsColorPicker 2', 'Example of WPCmsColorPicker with default value', '#ff6700'),
     new WPCmsSelectField ('select1', 'WPCmsSelectField 1', 'WPCmsSelectField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),

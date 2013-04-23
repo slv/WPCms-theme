@@ -26,7 +26,7 @@ Class WPCmsMultilanguageField {
   }
 
   public function addActionAdminEnqueueScripts ($hook) {
-    wp_enqueue_script('wpcms-multilanguage', get_template_directory_uri() . '/WPCms/assets/multilanguage.js', array('jquery'));
+    wp_enqueue_script('wpcms-multilanguage', WPCMS_STYLESHEET_DIR . '/WPCms/assets/multilanguage.js', array('jquery'));
     $this->field->addActionAdminEnqueueScripts($hook);
   }
 
