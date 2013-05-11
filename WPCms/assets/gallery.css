@@ -1,0 +1,20 @@
+.gallery-sortable {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  width: 100%;
+  min-height: 150px;
+  border: 2px solid #111;
+  border-radius: 4px;
+}
+
+.gallery-sort-item {
+  float:left;
+  display: inline-block;
+  margin: 10px;
+  border: 5px solid #aaa;
+  border-radius: 4px;
+  cursor: pointer; }
+
+.gallery-sort-item img {
+  display: block; }

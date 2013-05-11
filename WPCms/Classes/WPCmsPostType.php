@@ -164,7 +164,8 @@ Class WPCmsPostType {
     foreach ($this->custom_fields as $id => $field) {
 
       $post_id = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : false);
-      if (!isset($field['template-file']) || $post_id && get_post_meta($post_id, '_wp_page_template', true) == $field['template-file'])
+      $template_file = get_post_meta($post_id, '_wp_page_template', true);
+      if (!isset($field['template-file']) || $post_id && ($template_file == $field['template-file'] || (is_array($field['template-file']) && in_array($template_file, $field['template-file']))))
       {
         $field = array_merge(array(
           'title' => __('Custom Fields', WPCmsStatus::getStatus()->getData('textdomain')),

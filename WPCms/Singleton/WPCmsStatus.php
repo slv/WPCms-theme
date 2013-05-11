@@ -87,7 +87,7 @@ Class WPCmsStatus
       if (isset(self::$array[$hash]))
          return self::$array[$hash];
       else
-         return null;
+         return array();
    }
 
    public static function addToArray($hash, $value = '')
