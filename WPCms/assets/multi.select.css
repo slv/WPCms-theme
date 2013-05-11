@@ -22,6 +22,7 @@
   font-size:13px;
   color:#303030; }
 
+.multi-select-field .options-list-sortable,
 .multi-select-field .options-list {
   position:relative;
   overflow-y:scroll;
@@ -33,6 +34,7 @@
   border-radius:7px;
   background:#ffffff; }
 
+.multi-select-field .options-list-sortable > a,
 .multi-select-field .options-list > a {
   position:relative;
   overflow:hidden;
@@ -48,6 +50,7 @@
   background:#dedede;
   text-decoration:none; }
 
+.multi-select-field .options-list-sortable > a > span,
 .multi-select-field .options-list > a > span {
   position:absolute;
   right:0px;
@@ -62,11 +65,14 @@
   background:rgba(0, 0, 0, 0.6); }
 
 
+.multi-select-field .options-list-sortable > a:hover,
 .multi-select-field .options-list > a:hover {
   background:#ededed; }
 
+.multi-select-field .options-list-sortable > a.selected,
 .multi-select-field .options-list > a.selected {
   background:#a0a0a0; }
 
+.multi-select-field .options-list-sortable > a.selected:hover,
 .multi-select-field .options-list > a.selected:hover {
   background:#b0b0b0; }

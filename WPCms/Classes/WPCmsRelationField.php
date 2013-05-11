@@ -52,6 +52,10 @@ Class WPCmsRelationField Extends WPCmsField {
     }
 
     echo '</div>';
+    echo '<hr />';
+    echo '<label>', __('And Drag Items to Change Order', WPCmsStatus::getStatus()->getData('textdomain')), ':</label>';
+    echo '<div class="options-list-sortable" style="width:100%;min-height:50px;">';
+    echo '</div>';
     echo '<input type="hidden" value="', esc_attr($data['value']), '" class="input" id="', $data['id'], '" name="', $data['name'], '" />';
 
     echo '</div>';
