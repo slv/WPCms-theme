@@ -48,13 +48,13 @@ Class WPCmsRelationField Extends WPCmsField {
     echo '<div class="options-list" id="', $data['id'], '_wrapper" style="width:100%;height:150px;">';
 
     foreach ($posts as $p) {
-      echo '<a href="', $p->ID, '"', (in_array($p->ID, $values) ? ' class="selected"' : ''), '>', $p->post_title, ' <span>', $p->post_date, '<br />', $p->post_status, '</span></a>';
+      echo '<a href="', $p->ID, '">', $p->post_title, ' <span>', $p->post_date, '<br />', $p->post_status, '</span></a>';
     }
 
     echo '</div>';
     echo '<hr />';
     echo '<label>', __('And Drag Items to Change Order', WPCmsStatus::getStatus()->getData('textdomain')), ':</label>';
-    echo '<div class="options-list-sortable" style="width:100%;min-height:50px;">';
+    echo '<div class="options-list-sortable" style="width:100%;min-height:50px;max-height:200px;">';
     echo '</div>';
     echo '<input type="hidden" value="', esc_attr($data['value']), '" class="input" id="', $data['id'], '" name="', $data['name'], '" />';
 

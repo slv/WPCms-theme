@@ -3,25 +3,33 @@ jQuery(document).ready(function($) {
 
   $('.multi-select-field').each(function (k, field) {
 
-    var sortables = $(field).find(".options-list-sortable").first();
-
-    function getValues ()
-    {
-      var values = [];
-      $(field).find('.options-list-sortable > a').each(function (k, option) {
-        values.push($(option).attr('href'));
-      });
-      return values;
-    }
+    var sortables = $(field).find(".options-list-sortable").first(),
+        values = $(field).find('.input').val().split(',');
 
     function initValues () {
-      $.each($(field).find('.input').val().split(','), function (k, v) {
-        $(field).find('.options-list > a[href='+v+']').clone().attr({id: 'option-sort-'+v, href: '#'}).removeClass('selected').appendTo(sortables);
+      sortables.html('');
+      $(field).find('.options-list > a').removeClass('selected');
+      $.each(values, function (k, v) {
+        $(field).find('.options-list > a[href='+v+']').addClass('selected')
+        .clone().attr({id: 'option-sort-'+v}).removeClass('selected').click(function (e) {e.preventDefault(); })
+        .appendTo(sortables);
       });
+      $(field).find('.input').val(values.join(','));
     }
 
-    function setSelected () {
-      $(field).find('.input').val(getValues().join(','));
+    function setItems (val) {
+      values = val;
+    }
+
+    function addItem (itemId) {
+      if (!~values.indexOf(itemId))
+        values.push(itemId);
+    }
+
+    function removeItem (itemId) {
+      var i = values.indexOf(itemId);
+      if (~i)
+        values.splice(i, 1);
     }
 
     $(field).find('.multi-select-filter').on("keyup", function (e) {
@@ -36,13 +44,13 @@ jQuery(document).ready(function($) {
         click: function (e) {
           e.preventDefault();
           $(option).toggleClass('selected');
-          if ($(this).hasClass('selected')) {
-            $(option).clone().attr({id: 'option-sort-'+$(option).attr('href'), href: '#'}).appendTo(sortables);
-          }
-          else {
-            $(field).find('* #option-sort-' + $(option).attr('href')).remove();
-          }
-          setSelected();
+
+          if ($(this).hasClass('selected'))
+            addItem($(option).attr('href'));
+          else
+            removeItem($(option).attr('href'));
+
+          initValues();
         }
       });
     });
@@ -50,20 +58,17 @@ jQuery(document).ready(function($) {
     $(field).find('.select-all').bind({
       click: function (e) {
         e.preventDefault();
-        sortables.html('');
-        $(field).find('.options-list > a').addClass('selected').each(function (k, option) {
-          $(option).clone().attr({id: 'option-sort-'+$(option).attr('href'), href: '#'}).appendTo(sortables);
-        });
-        setSelected();
+        setItems([]);
+        $(field).find('.options-list > a').each(function (k, option) { addItem($(option).attr('href')); });
+        initValues();
       }
     });
 
     $(field).find('.select-none').bind({
       click: function (e) {
         e.preventDefault();
-        $(field).find('.options-list > a').removeClass('selected');
-        sortables.html('');
-        setSelected();
+        setItems([]);
+        initValues();
       }
     });
 
@@ -71,7 +76,8 @@ jQuery(document).ready(function($) {
         stop: function (event, ui) {
             var ids = $(this).sortable("toArray");
             var val = ids.join(',').replace(/option-sort-/gi, '');
-            $(field).find('.input').val(val);
+            setItems(val.split(','));
+            initValues();
         }
     });
 
