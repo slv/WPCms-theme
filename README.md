@@ -57,6 +57,46 @@ Creare custom post type
 	
 		elenco di campi che devono essere visualizzati per ogni post (checkbox, textarea, select etc…)
 
+
+    $customPostType = new WPCmsPostType(array(
+    	'post_type' => 'projects',
+    	'fields' => array...
+    ));
+
+
+	'fields' è un array così composto:
+		
+	array(
+		'wpcms-custom-1' => array(
+			'title' => 'Campi Custom 1',
+			'fields' => elenco di campi per il box "Campi Custom 1"
+		),
+		'wpcms-cust-2' => array(
+			'title' => 'Campi Custom 2',
+			'fields' => elenco di campi per il box "Campi Custom 2"
+		)
+    )
+    
+    a sua volta 'fields' è un elenco di campi personalizzati (checkbox, input, select etc...)
+    	
+    esempio:
+    
+	
+	array(
+		'wpcms-custom-1' => array(
+			'title' => 'Campi Custom 1',
+			'fields' => array(
+				new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
+				new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
+				new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField')
+			)
+		),
+		...
+    )
+		
+	
+	  
+
 ### Metodi WPCmsPostType
 
 ####setArgs($args)
@@ -106,11 +146,14 @@ Creare custom post type
 	'menu_name' => __('Custom Items', $td)
 
 
+####register()
+
+	una volta settati argomenti e etichette
 
 
-### Utilities:
+## Utilities:
 
-#### _o($label, $default = '')
+### _o($label, $default = '')
 
 	restituisce l'opzione settata in una WPCmsSettingsPage e se non la trova restituisce $default
 	
@@ -119,7 +162,7 @@ Creare custom post type
 
 
 
-#### _m($label, $postID = false)
+### _m($label, $postID = false)
 
 	dentro al Loop posso ricavare il metadata con id = $label, fuori dal Loop devo passare anche l'ID del post
 	
@@ -143,16 +186,128 @@ Creare custom post type
 	}
 
 
+## Esempio:
 
 
+in WPCms-admin.php setto un custom post type e lo chiamo 'progetti'
+
+	$postTypeProgetti = new WPCmsPostType(array(
+		'post_type' => 'progetti',
+		'fields' => array()
+	));
+
+	$postTypeProgetti->register();
 
 
+come campi personalizzati mi servono una mappa Google, un immagine e 2 campi di testo. La mappa la voglio mettere in un box a parte
 
 
+	$postTypeProgetti = new WPCmsPostType(array(
+		'post_type' => 'progetti',
+		'fields' => array(
+			'google-map-box' => array(),
+			'immagine-e-testi-box' => array()
+		)
+	));
+
+	$postTypeProgetti->register();
+	
+dentro a 'google-map-box' e 'immagine-e-testi-box' devo settare title e i campi:
+
+	$postTypeProgetti = new WPCmsPostType(array(
+		'post_type' => 'progetti',
+		'fields' => array(
+			'google-map-box' => array(
+				'title' => 'Box per la Mappa',
+				'fields' => array...
+			),
+			'immagine-e-testi-box' => array(
+				'title' => 'Box per immagine e i testi',
+				'fields' => array...
+			)
+		)
+	));
+
+	$postTypeProgetti->register();
+
+i fields che mi servono sono:
+
+immagine: WPCmsImageField
+testi: WPCmsTextField
+mappa: WPCmsGoogleMapField
+
+quindi:
+
+	$postTypeProgetti = new WPCmsPostType(array(
+		'post_type' => 'progetti',
+		'fields' => array(
+			'google-map-box' => array(
+				'title' => 'Box per la Mappa',
+				'fields' => array(
+        			new WPCmsGoogleMapField (array(
+          				'id' => 'ttgmap1',
+          				'name' => 'Mappa',
+          				'description' => 'Descrizione della mappa')),
+				)
+			),
+			'immagine-e-testi-box' => array(
+				'title' => 'Box per immagine e i testi',
+				'fields' => array(
+			        new WPCmsImageField (array(
+          				'id' => 'ttimage1',
+				          'name' => 'Immagine',
+				          'description' => 'Descrizione Immagine')),
+			        new WPCmsTextField (array(
+			          'id' => 'tttext1',
+			          'name' => 'Testo 1',
+			          'description' => 'Descrizione testo 1')),
+			        new WPCmsTextField (array(
+			          'id' => 'tttext2',
+			          'name' => 'Testo 2',
+			          'description' => 'Descrizione testo 2'))
+				)
+			)
+		)
+	));
+
+	$postTypeProgetti->register();
 
 
+ i file che gestiranno l'elenco e il post singolo di questo tipo sono:
+ 
+ 	archive-progetti.php
+ 	single-progetti.php
+ 
+ 
+ se voglio collegare una taxonomy per filtrare i post devo registrarla:
+ 
+ 	register_taxonomy(
+		'categorie-progetti',
+		null,
+		array(
+			'hierarchical' => true,
+			'labels' => array(
+				'name' => 'Categorie Progetti'
+			),
+			'show_ui' => true,
+			'query_var' => true,
+			'rewrite' => array('slug' => 'categorie-progetti'),
+		)
+	);
+	
+e poi collegarla al post
+
+ 	
+ 	$postTypeProgetti->setArgs(array(
+		'taxonomies' => array('categorie-progetti')
+	));
 
 
+nell'admin comparirà il box della taxonomy,
+il file che gestisce l'elenco di tutti i post con questa taxonomy, anche se i post sono di tipo diverso:
+
+
+	taxonomy-categorie-progetti.php
 
 
 

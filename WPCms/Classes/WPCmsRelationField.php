@@ -2,13 +2,13 @@
 
 Class WPCmsRelationField Extends WPCmsField {
 
-  function __construct ($id, $name = '', $description = '', $default = '', $postTypeOfRelated = '')
+  function __construct ($config)
   {
-    $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($id);
-    $this->name = $name;
-    $this->description = $description;
-    $this->default = $default;
-    $this->postTypeOfRelated = $postTypeOfRelated;
+    $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($config['id']);
+    $this->name = isset($config['name']) ? $config['name'] : '';
+    $this->description = isset($config['description']) ? $config['description'] : '';
+    $this->default = isset($config['default']) ? $config['default'] : '';
+    $this->postTypeOfRelated = isset($config['related']) ? $config['related'] : '';
 
     return $this;
   }

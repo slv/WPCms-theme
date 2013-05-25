@@ -2,13 +2,13 @@
 
 Class WPCmsRadioField Extends WPCmsField {
 
-  function __construct ($id, $name = '', $description = '', $options = array(), $default = '', $fieldsRelation = array()) {
-    $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($id);
-    $this->name = $name;
-    $this->description = $description;
-    $this->options = $options;
-    $this->default = $default;
-    $this->fieldsRelation = $fieldsRelation;
+  function __construct ($config) {
+    $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($config['id']);
+    $this->name = isset($config['name']) ? $config['name'] : '';
+    $this->description = isset($config['description']) ? $config['description'] : '';
+    $this->options = isset($config['options']) ? $config['options'] : array();
+    $this->default = isset($config['default']) ? $config['default'] : '';
+    $this->fieldsRelation = isset($config['relations']) ? $config['relations'] : array();
 
     return $this;
   }
