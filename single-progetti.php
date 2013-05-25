@@ -6,6 +6,16 @@
 <div>
   <h2><?php the_title(); ?></h2>
   <div class="content"><?php the_content(); ?></div>
+
+
+<?php $postIds = explode(',', _m('relation2'));
+foreach ($postIds as $postId) { $tmpPost = get_post($postId);
+
+  echo $tmpPost->post_title;
+
+} ?>
+
+
 </div>
 
 

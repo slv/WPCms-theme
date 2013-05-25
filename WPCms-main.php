@@ -571,7 +571,12 @@ $postTypeProgetti = new WPCmsPostType(array(
         new WPCmsTextField (array(
           'id' => 'tttext2',
           'name' => 'Testo 2',
-          'description' => 'Descrizione testo 2'))
+          'description' => 'Descrizione testo 2')),
+        new WPCmsRelationField (array(
+          'id' => 'relation2',
+          'name' => 'WPCmsRelationField 2',
+          'description' => 'Example of WPCmsRelationField related to Page',
+          'related' => 'page')),
       )
     )
   )
