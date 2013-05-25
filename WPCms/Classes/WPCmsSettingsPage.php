@@ -2,12 +2,12 @@
 
 Class WPCmsSettingsPage {
 
-  function __construct($title = 'Untitled', $menu_slug = '', $fields = array(), $parentSlug = null) {
+  function __construct($config) {
 
-    $this->title = $title;
-    $this->fields = $fields;
-    $this->parentSlug = $parentSlug;
-    $this->slug = $menu_slug;
+    $this->title = isset($config['title']) ? $config['title'] : 'Untitled';
+    $this->slug = isset($config['menu_slug']) ? $config['menu_slug'] : '';
+    $this->fields = isset($config['fields']) ? $config['fields'] : array();
+    $this->parentSlug = isset($config['parent_slug']) ? $config['parent_slug'] : null;
     $this->capabilityType = 'manage_options';
 
     $this->options_group = $this->hash($this->title);

@@ -55,40 +55,44 @@ WPCmsStatus::getStatus()->setData('pre', 'wpcms_');
 // Settings Page
 //
 
-$txtComuni = new WPCmsSettingsPage('Testi Comuni', 'testi_comuni',
+$txtComuni = new WPCmsSettingsPage(
   array(
-    new WPCmsSeparatorField ('separator1', 'WPCmsSeparatorField 1', 'Example of WPCmsSeparatorField'),
-    new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
-    new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
-    new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
-    new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
-    new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
-    new WPCmsCheckboxField ('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
-    new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
-    new WPCmsColorPicker ('colorpicker2', 'WPCmsColorPicker 2', 'Example of WPCmsColorPicker with default value', '#ff6700'),
-    new WPCmsSelectField ('select1', 'WPCmsSelectField 1', 'WPCmsSelectField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
-    new WPCmsSelectField ('select2', 'WPCmsSelectField 2', 'WPCmsSelectField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
-    new WPCmsRelationField ('relation1', 'WPCmsRelationField 1', 'Example of WPCmsRelationField related to Posts', '', 'post'),
-    new WPCmsRelationField ('relation2', 'WPCmsRelationField 2', 'Example of WPCmsRelationField related to Page', '', 'page'),
-    new WPCmsRadioField ('radio1', 'WPCmsRadioField 1', 'Example of WPCmsRadioField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'first', array('first' => 'related111', 'second' => 'related112,related113')),
-    new WPCmsRadioField ('radio2', 'WPCmsRadioField 2', 'Example of WPCmsRadioField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
-    new WPCmsInputField ('related111', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = First Option'),
-    new WPCmsInputField ('related112', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = Second Option'),
-    new WPCmsInputField ('related113', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = Second Option'),
-    new WPCmsGoogleFontsField ('googlefonts1', 'WPCmsGoogleFontsField 1', 'Example of WPCmsGoogleFontsField'),
-    new WPCmsGoogleFontsField ('googlefonts2', 'WPCmsGoogleFontsField 2', 'Example of WPCmsGoogleFontsField with default value', 'Roboto:300'),
-    new WPCmsImageField ('image1', 'WPCmsImageField 1', 'Example of WPCmsImageField'),
-    new WPCmsGoogleMapField ('gmap1', 'WPCmsGoogleMapField 1', 'Example of WPCmsGoogleMapField'),
-    new WPCmsGalleryField ('gallery1', 'WPCmsGalleryField 1', 'Example of WPCmsGalleryField'),
-    new WPCmsSeparatorField ('separator2', 'WPCmsMultilanguageField Fields:', 'Every fields can be added as "multillanguage" simply passing it as unique parameter of WPCmsMultilanguageField constructor<br />
-      for example the first of following fields is:<br />
-      new WPCmsMultilanguageField(new WPCmsInputField (\'input2\', \'WPCmsInputField 2\', \'Example of WPCmsInputField in a multilanguage context\'));'),
-      new WPCmsMultilanguageField (
-    new WPCmsInputField ('input2', 'WPCmsInputField 2', 'Example of WPCmsInputField in a multilanguage context')),
-      new WPCmsMultilanguageField (
-    new WPCmsTextField ('text2', 'WPCmsTextField 2', 'If you pass an array as \'default\' parameter<br />array(\'{$lang}\' => \'{$value}\', ...)<br />you can define different default values for every langauge', array('en' => 'default value EN', 'it' => 'default value IT'))),
-      new WPCmsMultilanguageField (
-    new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context'))
+    'title' => 'Testi Comuni',
+    'menu_slug' => 'testi_comuni',
+    'fields' => array(
+      new WPCmsSeparatorField ('separator1', 'WPCmsSeparatorField 1', 'Example of WPCmsSeparatorField'),
+      new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
+      new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
+      new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
+      new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
+      new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
+      new WPCmsCheckboxField ('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
+      new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
+      new WPCmsColorPicker ('colorpicker2', 'WPCmsColorPicker 2', 'Example of WPCmsColorPicker with default value', '#ff6700'),
+      new WPCmsSelectField ('select1', 'WPCmsSelectField 1', 'WPCmsSelectField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
+      new WPCmsSelectField ('select2', 'WPCmsSelectField 2', 'WPCmsSelectField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
+      new WPCmsRelationField ('relation1', 'WPCmsRelationField 1', 'Example of WPCmsRelationField related to Posts', '', 'post'),
+      new WPCmsRelationField ('relation2', 'WPCmsRelationField 2', 'Example of WPCmsRelationField related to Page', '', 'page'),
+      new WPCmsRadioField ('radio1', 'WPCmsRadioField 1', 'Example of WPCmsRadioField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'first', array('first' => 'related111', 'second' => 'related112,related113')),
+      new WPCmsRadioField ('radio2', 'WPCmsRadioField 2', 'Example of WPCmsRadioField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
+      new WPCmsInputField ('related111', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = First Option'),
+      new WPCmsInputField ('related112', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = Second Option'),
+      new WPCmsInputField ('related113', 'WPCmsInputField related to WPCmsRadioField 1', 'active with value = Second Option'),
+      new WPCmsGoogleFontsField ('googlefonts1', 'WPCmsGoogleFontsField 1', 'Example of WPCmsGoogleFontsField'),
+      new WPCmsGoogleFontsField ('googlefonts2', 'WPCmsGoogleFontsField 2', 'Example of WPCmsGoogleFontsField with default value', 'Roboto:300'),
+      new WPCmsImageField ('image1', 'WPCmsImageField 1', 'Example of WPCmsImageField'),
+      new WPCmsGoogleMapField ('gmap1', 'WPCmsGoogleMapField 1', 'Example of WPCmsGoogleMapField'),
+      new WPCmsGalleryField ('gallery1', 'WPCmsGalleryField 1', 'Example of WPCmsGalleryField'),
+      new WPCmsSeparatorField ('separator2', 'WPCmsMultilanguageField Fields:', 'Every fields can be added as "multillanguage" simply passing it as unique parameter of WPCmsMultilanguageField constructor<br />
+        for example the first of following fields is:<br />
+        new WPCmsMultilanguageField(new WPCmsInputField (\'input2\', \'WPCmsInputField 2\', \'Example of WPCmsInputField in a multilanguage context\'));'),
+        new WPCmsMultilanguageField (
+      new WPCmsInputField ('input2', 'WPCmsInputField 2', 'Example of WPCmsInputField in a multilanguage context')),
+        new WPCmsMultilanguageField (
+      new WPCmsTextField ('text2', 'WPCmsTextField 2', 'If you pass an array as \'default\' parameter<br />array(\'{$lang}\' => \'{$value}\', ...)<br />you can define different default values for every langauge', array('en' => 'default value EN', 'it' => 'default value IT'))),
+        new WPCmsMultilanguageField (
+      new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context'))
+    )
   )
 );
 
@@ -125,40 +129,42 @@ register_taxonomy(
 //
 
 $customPostType = new WPCmsPostType(
-  'custom-post-type',
   array(
-    'shared' => array(
-      'title' => 'Dati Aggiuntivi',
-      'fields' => array(
-        new WPCmsSeparatorField ('separator1', 'WPCmsSeparatorField 1', 'Example of WPCmsSeparatorField'),
-        new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
-        new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
-        new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
-        new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
-        new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
-        new WPCmsCheckboxField('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
-        new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
-        new WPCmsColorPicker ('colorpicker2', 'WPCmsColorPicker 2', 'Example of WPCmsColorPicker with default value', '#ff6700'),
-        new WPCmsSelectField ('select1', 'WPCmsSelectField 1', 'WPCmsSelectField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
-        new WPCmsSelectField ('select2', 'WPCmsSelectField 2', 'WPCmsSelectField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
-        new WPCmsRelationField ('relation1', 'WPCmsRelationField 1', 'Example of WPCmsRelationField related to same posttype Posts', '', 'custom-post-type'),
-        new WPCmsRelationField ('relation2', 'WPCmsRelationField 2', 'Example of WPCmsRelationField related to media', '', 'attachment'),
-        new WPCmsRadioField ('radio1', 'WPCmsRadioField 1', 'Example of WPCmsRadioField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
-        new WPCmsRadioField ('radio2', 'WPCmsRadioField 2', 'Example of WPCmsRadioField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
-        new WPCmsGoogleFontsField ('googlefonts1', 'WPCmsGoogleFontsField 1', 'Example of WPCmsGoogleFontsField'),
-        new WPCmsGoogleFontsField ('googlefonts2', 'WPCmsGoogleFontsField 2', 'Example of WPCmsGoogleFontsField with default value', 'Roboto:300'),
-        new WPCmsImageField ('image1', 'WPCmsImageField 1', 'Example of WPCmsImageField'),
-        new WPCmsSeparatorField ('separator2', 'WPCmsMultilanguageField Fields:', 'Every fields can be added as "multillanguage" simply passing it as unique parameter of WPCmsMultilanguageField constructor<br />
-          for example the first of following fields is:<br />
-          new WPCmsMultilanguageField(new WPCmsInputField (\'input2\', \'WPCmsInputField 2\', \'Example of WPCmsInputField in a multilanguage context\'));'),
-          new WPCmsMultilanguageField (
-        new WPCmsInputField ('input2', 'WPCmsInputField 2', 'Example of WPCmsInputField in a multilanguage context')),
-          new WPCmsMultilanguageField (
-        new WPCmsTextField ('text2', 'WPCmsTextField 2', 'If you pass an array as \'default\' parameter<br />array(\'{$lang}\' => \'{$value}\', ...)<br />you can define different default values for every langauge', array('en' => 'default value EN', 'it' => 'default value IT'))),
-          new WPCmsMultilanguageField (
-        new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context')),
-          new WPCmsMultilanguageField (
-        new WPCmsTinyMCEField ('tinymce2', 'WPCmsTinyMCEField 2', 'Example of WPCmsTinyMCEField'))
+    'post_type' => 'custom-post-type',
+    'fields' => array(
+      'shared' => array(
+        'title' => 'Dati Aggiuntivi',
+        'fields' => array(
+          new WPCmsSeparatorField ('separator1', 'WPCmsSeparatorField 1', 'Example of WPCmsSeparatorField'),
+          new WPCmsInputField ('input1', 'WPCmsInputField 1', 'Example of WPCmsInputField'),
+          new WPCmsTextField ('text1', 'WPCmsTextField 1', 'Example of WPCmsTextField'),
+          new WPCmsTextareaField ('textarea1', 'WPCmsTextareaField 1', 'Example of WPCmsTextareaField'),
+          new WPCmsTinyMCEField ('tinymce1', 'WPCmsTinyMCEField 1', 'Example of WPCmsTinyMCEField'),
+          new WPCmsPasswordField ('password1', 'WPCmsPasswordField 1', 'Example of WPCmsPasswordField', 'password'),
+          new WPCmsCheckboxField('checkbox1', 'WPCmsCheckboxField 1', 'Example of WPCmsCheckboxField'),
+          new WPCmsColorPicker ('colorpicker1', 'WPCmsColorPicker 1', 'Example of WPCmsColorPicker'),
+          new WPCmsColorPicker ('colorpicker2', 'WPCmsColorPicker 2', 'Example of WPCmsColorPicker with default value', '#ff6700'),
+          new WPCmsSelectField ('select1', 'WPCmsSelectField 1', 'WPCmsSelectField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
+          new WPCmsSelectField ('select2', 'WPCmsSelectField 2', 'WPCmsSelectField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
+          new WPCmsRelationField ('relation1', 'WPCmsRelationField 1', 'Example of WPCmsRelationField related to same posttype Posts', '', 'custom-post-type'),
+          new WPCmsRelationField ('relation2', 'WPCmsRelationField 2', 'Example of WPCmsRelationField related to media', '', 'attachment'),
+          new WPCmsRadioField ('radio1', 'WPCmsRadioField 1', 'Example of WPCmsRadioField', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option')),
+          new WPCmsRadioField ('radio2', 'WPCmsRadioField 2', 'Example of WPCmsRadioField with default value', array('first' => 'First Option', 'second' => 'Second Option', 'third' => 'Third Option'), 'second'),
+          new WPCmsGoogleFontsField ('googlefonts1', 'WPCmsGoogleFontsField 1', 'Example of WPCmsGoogleFontsField'),
+          new WPCmsGoogleFontsField ('googlefonts2', 'WPCmsGoogleFontsField 2', 'Example of WPCmsGoogleFontsField with default value', 'Roboto:300'),
+          new WPCmsImageField ('image1', 'WPCmsImageField 1', 'Example of WPCmsImageField'),
+          new WPCmsSeparatorField ('separator2', 'WPCmsMultilanguageField Fields:', 'Every fields can be added as "multillanguage" simply passing it as unique parameter of WPCmsMultilanguageField constructor<br />
+            for example the first of following fields is:<br />
+            new WPCmsMultilanguageField(new WPCmsInputField (\'input2\', \'WPCmsInputField 2\', \'Example of WPCmsInputField in a multilanguage context\'));'),
+            new WPCmsMultilanguageField (
+          new WPCmsInputField ('input2', 'WPCmsInputField 2', 'Example of WPCmsInputField in a multilanguage context')),
+            new WPCmsMultilanguageField (
+          new WPCmsTextField ('text2', 'WPCmsTextField 2', 'If you pass an array as \'default\' parameter<br />array(\'{$lang}\' => \'{$value}\', ...)<br />you can define different default values for every langauge', array('en' => 'default value EN', 'it' => 'default value IT'))),
+            new WPCmsMultilanguageField (
+          new WPCmsTextareaField ('textarea2', 'WPCmsTextareaField 2', 'Example of WPCmsTextareaField in a multilanguage context')),
+            new WPCmsMultilanguageField (
+          new WPCmsTinyMCEField ('tinymce2', 'WPCmsTinyMCEField 2', 'Example of WPCmsTinyMCEField'))
+        )
       )
     )
   )
@@ -188,22 +194,24 @@ WPCmsStatus::getStatus()->addToArray('postTypeInstances', $customPostType);
 
 
 $customPostType2 = new WPCmsPostType(
-  'custom-post-type2',
   array(
-    'shared' => array(
-      'title' => 'Dati Aggiuntivi',
-      'fields' => array(
-        new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'related...', '', 'post'),
-        new WPCmsImageField('custom_post_type_image', 'Custom Post Image'),
-        new WPCmsImageField('custom_post_type_image1', 'Custom Post Image'),
-        new WPCmsImageField('custom_post_type_image2', 'Custom Post Image'),
-        new WPCmsImageField('custom_post_type_image3', 'Custom Post Image')
-      )
-    ),
-    'wpcms-format-image' => array(
-      'title' => 'Custom Fields for Post Format image',
-      'fields' => array(
-        new WPCmsInputField ('test112', 'Input available only for post format Image')
+    'post_type' => 'custom-post-type2',
+    'fields' => array(
+      'shared' => array(
+        'title' => 'Dati Aggiuntivi',
+        'fields' => array(
+          new WPCmsRelationField('custom_post_related', 'Related Custom Posts', 'related...', '', 'post'),
+          new WPCmsImageField('custom_post_type_image', 'Custom Post Image'),
+          new WPCmsImageField('custom_post_type_image1', 'Custom Post Image'),
+          new WPCmsImageField('custom_post_type_image2', 'Custom Post Image'),
+          new WPCmsImageField('custom_post_type_image3', 'Custom Post Image')
+        )
+      ),
+      'wpcms-format-image' => array(
+        'title' => 'Custom Fields for Post Format image',
+        'fields' => array(
+          new WPCmsInputField ('test112', 'Input available only for post format Image')
+        )
       )
     )
   )
@@ -232,9 +240,9 @@ $customPostType2->register();
 WPCmsStatus::getStatus()->addToArray('postTypeInstances', $customPostType2);
 
 
-$postType = new WPCmsPostType(
-  'post',
-  array(
+$postType = new WPCmsPostType(array(
+  'post_type' => 'post',
+  'fields' => array(
     'wpcms-format-image' => array(
       'title' => 'Custom Fields for Post Format image',
       'fields' => array(
@@ -242,7 +250,7 @@ $postType = new WPCmsPostType(
       )
     )
   )
-);
+));
 
 $postType->register();
 

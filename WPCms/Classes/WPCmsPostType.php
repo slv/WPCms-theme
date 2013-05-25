@@ -2,10 +2,11 @@
 
 Class WPCmsPostType {
 
-  function __construct ($post_type, $custom_fields = array(), $adminBarParent = false) {
+  function __construct ($config) {
 
-    $this->post_type = $post_type;
-    $this->custom_fields = $custom_fields;
+    $this->post_type = $config['post_type'];
+    $this->custom_fields = isset($config['fields']) ? $config['fields'] : array();
+
     $td = WPCmsStatus::getStatus()->getData('textdomain');
 
     $labels = array(
