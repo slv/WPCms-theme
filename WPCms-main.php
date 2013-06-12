@@ -14,6 +14,7 @@ require_once "WPCms/Singleton/WPCmsStatus.php";
 require_once "WPCms/Classes/WPCmsField.php";
 require_once "WPCms/Classes/WPCmsMultilanguageField.php";
 
+require_once "WPCms/Classes/WPCmsDatePicker.php";
 require_once "WPCms/Classes/WPCmsInputField.php";
 require_once "WPCms/Classes/WPCmsTextField.php";
 require_once "WPCms/Classes/WPCmsTextareaField.php";
@@ -261,6 +262,26 @@ $customPostType = new WPCmsPostType(
             'id' => 'separator1',
             'name' => 'WPCmsSeparatorField 1',
             'description' => 'Example of WPCmsSeparatorField')),
+          
+          new WPCmsDatePicker (array(
+            'id' => 'datepicker1',
+            'name' => 'Publish date',
+            'description' => 'Select publish date',
+            'options' => array('numberOfMonths' => 2, 'showWeek' => 0, 'autoSize' => 0))),
+          
+          new WPCmsDatePicker (array(
+            'id' => 'datepicker2',
+            'maxDate' => 'datepicker3',
+            'name' => 'From',
+            'description' => 'Select start date',
+            'options' => array('numberOfMonths' => 2, 'showWeek' => 0, 'autoSize' => 0))),
+
+          new WPCmsDatePicker (array(
+            'id' => 'datepicker3',
+            'minDate' => 'datepicker2',
+            'name' => 'To',
+            'description' => 'Select end date',
+            'options' => array('numberOfMonths' => 2, 'showWeek' => 0, 'autoSize' => 0))),
 
           new WPCmsInputField (array(
             'id' => 'input1',
