@@ -29,6 +29,7 @@ require_once "WPCms/Classes/WPCmsRelationField.php";
 require_once "WPCms/Classes/WPCmsColorPicker.php";
 require_once "WPCms/Classes/WPCmsUploadField.php";
 require_once "WPCms/Classes/WPCmsImageField.php";
+require_once "WPCms/Classes/WPCmsImageProField.php";
 require_once "WPCms/Classes/WPCmsGoogleMapField.php";
 require_once "WPCms/Classes/WPCmsGalleryField.php";
 
@@ -180,6 +181,11 @@ $txtComuni = new WPCmsSettingsPage(
         'name' => 'WPCmsImageField 1',
         'description' => 'Example of WPCmsImageField')),
 
+      new WPCmsImageProField (array(
+        'id' => 'image2',
+        'name' => 'WPCmsImageProField',
+        'description' => 'Example of WPCmsImageProField')),
+
       new WPCmsGoogleMapField (array(
         'id' => 'gmap1',
         'name' => 'WPCmsGoogleMapField 1',
@@ -262,13 +268,13 @@ $customPostType = new WPCmsPostType(
             'id' => 'separator1',
             'name' => 'WPCmsSeparatorField 1',
             'description' => 'Example of WPCmsSeparatorField')),
-          
+
           new WPCmsDatePicker (array(
             'id' => 'datepicker1',
             'name' => 'Publish date',
             'description' => 'Select publish date',
             'options' => array('numberOfMonths' => 2, 'showWeek' => 0, 'autoSize' => 0))),
-          
+
           new WPCmsDatePicker (array(
             'id' => 'datepicker2',
             'maxDate' => 'datepicker3',
@@ -525,23 +531,38 @@ $customPostType2->register();
 WPCmsStatus::getStatus()->addToArray('postTypeInstances', $customPostType2);
 
 
-$postType = new WPCmsPostType(array(
-  'post_type' => 'post',
+
+
+$pageType = new WPCmsPostType(array(
+  'post_type' => 'page',
   'fields' => array(
-    'wpcms-format-image' => array(
-      'title' => 'Custom Fields for Post Format image',
+    'common' => array(
+      'title' => 'Per tutte le pagine',
       'fields' => array(
-        new WPCmsInputField (array(
-          'id' => 'test111',
-          'name' => 'Input available only for post format Image'))
+        new WPCmsInputField(array(
+          'id' => 'input_test',
+          'name' => 'Input Test'))
+      )
+    ),
+
+    'solo-portfolio' => array(
+      'title' => 'Solo per Portfolio',
+      'template-file' => 'template.pagina.test.php',
+      'fields' => array(
+        new WPCmsGoogleMapField(array(
+          'id' => 'mappa11',
+          'name' => 'Projects to Include in Slideshow')),
+
+        new WPCmsRelationField(array(
+          'id' => 'progetti11',
+          'name' => 'Projects to Include in Slideshow',
+          'related' => 'project'))
       )
     )
   )
 ));
 
-$postType->register();
-
-
+$pageType->register();
 
 
 
