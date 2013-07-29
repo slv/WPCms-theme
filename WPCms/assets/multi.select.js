@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
   $('.multi-select-field').each(function (k, field) {
 
     var sortables = $(field).find(".options-list-sortable").first(),
-        values = $(field).find('.input').val().split(',');
+        values = $(field).find('.input').val().length ? $(field).find('.input').val().split(',') : [];
 
     function initValues () {
       sortables.html('');
