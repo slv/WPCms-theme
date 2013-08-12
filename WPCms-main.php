@@ -3,7 +3,10 @@
 // Config
 
 define ('IS_CHILD_THEME', false);
-define ('WPCMS_STYLESHEET_DIR', (IS_CHILD_THEME ? get_stylesheet_directory_uri() : get_template_directory_uri()));
+
+
+define ('WPCMS_STYLESHEET_URI', (IS_CHILD_THEME ? get_stylesheet_directory_uri() : get_template_directory_uri()));
+define ('WPCMS_STYLESHEET_DIR', (IS_CHILD_THEME ? get_stylesheet_directory() : get_template_directory());
 
 //
 // Requires

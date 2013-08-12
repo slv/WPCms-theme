@@ -46,7 +46,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
 
   public function addActionAdminEnqueueScripts ($hook)
   {
-    wp_enqueue_script('wpcms-googlefonts', WPCMS_STYLESHEET_DIR . '/WPCms/assets/google.fonts.js', array('jquery'));
+    wp_enqueue_script('wpcms-googlefonts', WPCMS_STYLESHEET_URI . '/WPCms/assets/google.fonts.js', array('jquery'));
   }
 
   public function renderInnerInput ($post, $data = array()) {

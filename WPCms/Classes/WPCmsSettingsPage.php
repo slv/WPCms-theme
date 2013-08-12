@@ -43,7 +43,7 @@ Class WPCmsSettingsPage {
 
     if ($hook == $this->slug) {
 
-      wp_register_script('wpcms-custompost', WPCMS_STYLESHEET_DIR . '/WPCms/assets/custom.post.js', 'jquery');
+      wp_register_script('wpcms-custompost', WPCMS_STYLESHEET_URI . '/WPCms/assets/custom.post.js', 'jquery');
       wp_enqueue_script('wpcms-custompost');
 
       foreach ($this->fields as $k => $field) {

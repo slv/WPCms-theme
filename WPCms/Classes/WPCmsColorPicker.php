@@ -6,8 +6,8 @@ Class WPCmsColorPicker Extends WPCmsField {
   {
     wp_enqueue_style('farbtastic');
     wp_enqueue_script('farbtastic');
-    wp_enqueue_script('wpcms-colorpicker', WPCMS_STYLESHEET_DIR . '/WPCms/assets/color.picker.js', array('farbtastic', 'jquery'));
-    wp_enqueue_style('wpcms-colorpicker', WPCMS_STYLESHEET_DIR . '/WPCms/assets/color.picker.css', array('farbtastic'));
+    wp_enqueue_script('wpcms-colorpicker', WPCMS_STYLESHEET_URI . '/WPCms/assets/color.picker.js', array('farbtastic', 'jquery'));
+    wp_enqueue_style('wpcms-colorpicker', WPCMS_STYLESHEET_URI . '/WPCms/assets/color.picker.css', array('farbtastic'));
   }
 
   public function renderInnerInput ($post, $data = array())

@@ -5,7 +5,7 @@ Class WPCmsImageField Extends WPCmsField {
   public function addActionAdminEnqueueScripts ($hook)
   {
     if (function_exists('wp_enqueue_media')) { wp_enqueue_media(); }
-    wp_enqueue_script('wpcms-image', WPCMS_STYLESHEET_DIR . '/WPCms/assets/image.js', array('jquery', 'media-upload', 'thickbox'));
+    wp_enqueue_script('wpcms-image', WPCMS_STYLESHEET_URI . '/WPCms/assets/image.js', array('jquery', 'media-upload', 'thickbox'));
   }
 
   public function renderInnerInput ($post, $data = array())

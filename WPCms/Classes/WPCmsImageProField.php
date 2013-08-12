@@ -5,8 +5,8 @@ Class WPCmsImageProField Extends WPCmsField {
   public function addActionAdminEnqueueScripts ($hook)
   {
     if (function_exists('wp_enqueue_media')) { wp_enqueue_media(); }
-    wp_enqueue_script('wpcms-image-pro', WPCMS_STYLESHEET_DIR . '/WPCms/assets/image-pro.js', array('jquery-ui-core'));
-    wp_enqueue_style('wpcms-image-pro', WPCMS_STYLESHEET_DIR . '/WPCms/assets/image-pro.css');
+    wp_enqueue_script('wpcms-image-pro', WPCMS_STYLESHEET_URI . '/WPCms/assets/image-pro.js', array('jquery-ui-core'));
+    wp_enqueue_style('wpcms-image-pro', WPCMS_STYLESHEET_URI . '/WPCms/assets/image-pro.css');
   }
 
   public function renderInnerInput ($post, $data = array())

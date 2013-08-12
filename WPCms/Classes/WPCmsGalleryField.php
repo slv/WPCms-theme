@@ -5,8 +5,8 @@ Class WPCmsGalleryField Extends WPCmsField {
   public function addActionAdminEnqueueScripts ($hook)
   {
     if (function_exists('wp_enqueue_media')) { wp_enqueue_media(); }
-    wp_enqueue_script('wpcms-gallery', WPCMS_STYLESHEET_DIR . '/WPCms/assets/gallery.js', array('jquery-ui-core'));
-    wp_enqueue_style('wpcms-gallery', WPCMS_STYLESHEET_DIR . '/WPCms/assets/gallery.css');
+    wp_enqueue_script('wpcms-gallery', WPCMS_STYLESHEET_URI . '/WPCms/assets/gallery.js', array('jquery-ui-core'));
+    wp_enqueue_style('wpcms-gallery', WPCMS_STYLESHEET_URI . '/WPCms/assets/gallery.css');
   }
 
   public function renderInnerInput ($post, $data = array())

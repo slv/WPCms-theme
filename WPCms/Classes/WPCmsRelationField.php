@@ -15,8 +15,8 @@ Class WPCmsRelationField Extends WPCmsField {
 
   public function addActionAdminEnqueueScripts ($hook)
   {
-    wp_enqueue_script('wpcms-multiselect', WPCMS_STYLESHEET_DIR . '/WPCms/assets/multi.select.js', array('jquery'));
-    wp_enqueue_style('wpcms-multiselect', WPCMS_STYLESHEET_DIR . '/WPCms/assets/multi.select.css');
+    wp_enqueue_script('wpcms-multiselect', WPCMS_STYLESHEET_URI . '/WPCms/assets/multi.select.js', array('jquery'));
+    wp_enqueue_style('wpcms-multiselect', WPCMS_STYLESHEET_URI . '/WPCms/assets/multi.select.css');
   }
 
   public function renderInnerInput ($post, $data = array())
