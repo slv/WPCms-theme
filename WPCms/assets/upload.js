@@ -1,7 +1,11 @@
-jQuery(document).ready(function($) {
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
 
+_WPCmsGlobalInit.Upload = function ($) {
 
     $('.wpcms-upload-field').each(function (k, uploadField) {
+
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
 
         var field = null, deleteField = null, imgCont = null;
 
@@ -40,3 +44,6 @@ jQuery(document).ready(function($) {
     window.original_send_to_editor = window.send_to_editor;
 
 });
+
+jQuery(document).ready(_WPCmsGlobalInit.Upload);
+

@@ -1,6 +1,12 @@
-jQuery(document).ready(function($){
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
+
+_WPCmsGlobalInit.ImageProField = function ($) {
 
     $('.wpcms-image-pro-field').each(function (k, gall) {
+
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
+
         var field = $(this).find('.image-pro-input').first();
         var imagePro = $(this).find('.image-pro-wrapper').first();
         var imageProDelete = $(this).find('.image-pro-delete').first();
@@ -54,6 +60,9 @@ jQuery(document).ready(function($){
             return false;
         });
     });
-});
+};
+
+jQuery(document).ready(_WPCmsGlobalInit.ImageProField);
+
 
 

@@ -1,6 +1,11 @@
-jQuery(document).ready(function ($) {
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
+
+_WPCmsGlobalInit.Radio = function ($) {
 
   $(".wpcms-radio-relation").each(function (k, field) {
+
+    if ($(this).data('init')) return;
+    $(this).data('init', true);
 
     var qs = $(field).attr('data-related'), relations = {};
 
@@ -33,4 +38,6 @@ jQuery(document).ready(function ($) {
       });
     }
   });
-});
+};
+
+jQuery(document).ready(_WPCmsGlobalInit.Radio);

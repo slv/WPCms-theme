@@ -1,6 +1,12 @@
-jQuery(document).ready(function($){
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
+
+_WPCmsGlobalInit.Gallery = function ($) {
 
     $('.wpcms-gallery-field').each(function (k, gall) {
+
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
+
         var field = $(this).find('.gallery-input').first();
         var gallery = $(this).find('.gallery-sortable').first();
         var galleryDelete = $(this).find('.gallery-delete').first();
@@ -63,6 +69,8 @@ jQuery(document).ready(function($){
             }
         });
     });
-});
+}
+
+jQuery(document).ready(_WPCmsGlobalInit.Gallery);
 
 

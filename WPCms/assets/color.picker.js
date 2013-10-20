@@ -1,26 +1,16 @@
-jQuery(document).ready(function($) {
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
 
-    $('.farbtastic-colorpicker').each(function (k, colorpicker) {
-        var input = $(colorpicker).children().first();
-        var picker = $(colorpicker).children().last();
-        var isActive = false;
+_WPCmsGlobalInit.ColorPicker = function($) {
 
-        if (!$(input).val().match(/^#/)) {
-            $(input).val('#');
-        }
+    $('.wpcms-colorpicker').each(function (k, field) {
 
-        $(picker).hide();
-        $(picker).farbtastic(input);
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
 
-        $(input).bind({
-            blur: function() {
-                isActive = false;
-                $(picker).css({height: 0}).hide();
-            },
-            focus: function() {
-                isActive = true;
-                $(picker).css({height: 195}).show();
-            }
-        });
+        var input = $(field).children().first();
+        $(input).wpColorPicker();
     });
-});
+
+}
+
+jQuery(document).ready(_WPCmsGlobalInit.ColorPicker);

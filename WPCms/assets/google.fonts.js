@@ -57,23 +57,35 @@ var WPCmsFontStyles = {
 
 var WPCmsFontFamilies = {};
 
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
+
+_WPCmsGlobalInit.GoogleFonts = function ($) {
+
+    if ($('.wpcms-google-fonts-field .field-wrapper').length && !$('.wpcms-google-fonts-field .field-wrapper').first().data('init-families')) {
+        $('.wpcms-google-fonts-field .field-wrapper').first().data('init-families', true);
+        $('.wpcms-google-fonts-field .field-wrapper').first().find('select > option').each(function (k, option) {
+            WPCmsFontFamilies[$(option).val()] = $(option).attr('data-font');
+        });
+    }
+
+    $('.wpcms-google-fonts-field .field-wrapper').each(WPCmsRenderFonts).each(function (k, field) {
+
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
+
+        $(field).find('select').change(function () {
+            WPCmsRenderFonts(null, field);
+        });
+    });
+
+};
+
 jQuery(document).ready(function($) {
 
     if (typeof WebFontConfig == "undefined") WebFontConfig = {google: {families: []}};
     if (typeof WebFontConfig.google == "undefined") WebFontConfig.google = {families: []};
     if (typeof WebFontConfig.google.families == "undefined") WebFontConfig.google.families = [];
 
-    $('.wpcms-google-fonts-field .field-wrapper').first().find('select > option').each(function (k, option) {
-        WPCmsFontFamilies[$(option).val()] = $(option).attr('data-font');
-    });
-
-    $('.wpcms-google-fonts-field .field-wrapper').each(WPCmsRenderFonts).each(function (k, field) {
-
-        $(field).find('select').change(function () {
-
-            WPCmsRenderFonts(null, field);
-        });
-    });
-
+    _WPCmsGlobalInit.GoogleFonts($);
     WPCmsLoadGoogleFontsScript();
 });

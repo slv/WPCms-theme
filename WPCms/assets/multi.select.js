@@ -1,7 +1,11 @@
-jQuery(document).ready(function($) {
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
 
+_WPCmsGlobalInit.MultiSelectField = function ($) {
 
   $('.multi-select-field').each(function (k, field) {
+
+    if ($(this).data('init')) return;
+    $(this).data('init', true);
 
     var sortables = $(field).find(".options-list-sortable").first(),
         values = $(field).find('.input').val().length ? $(field).find('.input').val().split(',') : [];
@@ -83,4 +87,7 @@ jQuery(document).ready(function($) {
 
     initValues();
   });
-});
+};
+
+jQuery(document).ready(_WPCmsGlobalInit.MultiSelectField);
+

@@ -9,9 +9,10 @@ Class WPCmsGoogleMapField Extends WPCmsField {
 
   public function renderInnerInput ($post, $data = array())
   {
+    $mapId = 'gmap-' . $data['id'];
     echo '<div class="gmap">';
     echo '<input type="hidden" name="', $data['name'], '" id="', $data['id'], '" value="', esc_attr($data['value']), '" size="30" />';
-    echo '<div style="width:400px;height:300px;border:8px solid #eeeeee;border-radius:8px;" id="gmap-' . $data['id'] . '"></div>';
+    echo '<div style="width:400px;height:300px;border:8px solid #eeeeee;border-radius:8px;" id="' . $mapId . '"></div>';
 
 ?>
     <script>
@@ -21,7 +22,7 @@ Class WPCmsGoogleMapField Extends WPCmsField {
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           center: new google.maps.LatLng(53.000,0.0005)
         }
-        var map = new google.maps.Map(document.getElementById('gmap-<?php echo $data['id']; ?>'), mapOptions);
+        var map = new google.maps.Map(document.getElementById('<?php echo $mapId; ?>'), mapOptions);
         var marker;
         if ('<?php echo $data['value']; ?>' != '') {
           map.setCenter(new google.maps.LatLng(<?php echo $data['value']; ?>));

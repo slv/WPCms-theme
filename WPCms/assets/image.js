@@ -1,6 +1,12 @@
-jQuery(document).ready(function($){
+if (typeof _WPCmsGlobalInit == "undefined") _WPCmsGlobalInit = {};
+
+_WPCmsGlobalInit.ImageField = function ($) {
 
     $('.wpcms-image-field').each(function (k, gall) {
+
+        if ($(this).data('init')) return;
+        $(this).data('init', true);
+
         var field = $(this).find('.upload-image-input').first();
         var gallery = $(this).find('.image-wrapper').first();
         var galleryDelete = $(this).find('.upload-image-delete').first();
@@ -54,4 +60,7 @@ jQuery(document).ready(function($){
             return false;
         });
     });
-});
+};
+
+jQuery(document).ready(_WPCmsGlobalInit.ImageField);
+
