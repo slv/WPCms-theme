@@ -11,9 +11,14 @@ jQuery(document).ready(function ($) {
       sortable.find('.module').each(function (k) {
         var module = $(this),
             order = k+1;
-        module.find('input').each(function (k) {
-          if ($(this).attr('id') && ~$(this).attr('id').indexOf('____')) {
-            var name = $(this).attr('id').replace('____', '[' + order + ']');
+        module.find('input, select').each(function (k) {
+          var startingId = $(this).attr('id');
+
+          if ($(this).attr('type') == 'radio')
+            startingId = module.find('fieldset').first().attr('id');
+
+          if (startingId && ~startingId.indexOf('____')) {
+            var name = startingId.replace('____', '[' + order + ']');
             $(this).attr('name', name);
           }
         });
