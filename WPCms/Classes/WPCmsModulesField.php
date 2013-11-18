@@ -57,7 +57,7 @@ Class WPCmsModulesField Extends WPCmsField {
 
     echo '<div class="modules-field" id="', $data['id'], '">';
 
-    echo '<div class="modules-list-droppable" id="', $data['id'], '_droppable" style="min-height:50px;">';
+    echo '<div class="modules-list-droppable" id="', $data['id'], '_droppable">';
 
     if (is_array($data['value'])) {
       foreach ($data['value'] as $order => $module_data) {
@@ -65,7 +65,7 @@ Class WPCmsModulesField Extends WPCmsField {
 
         $module = $modules_cache[$module_data['widget_type']];
 
-        echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="form">
+        echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="module-remove">remove</div><div class="form">
           <input type="hidden" id="', $data['id'], '____[widget_type]" value="', $module['type'], '" />';
 
         foreach ($module['fields'] as $field) {
@@ -94,7 +94,7 @@ Class WPCmsModulesField Extends WPCmsField {
     echo '<div class="modules-list" id="', $data['id'], '_wrapper">';
 
     foreach ($this->modules as $module) {
-      echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="form">
+      echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="module-remove">remove</div><div class="form">
         <input type="hidden" id="', $data['id'], '____[widget_type]" value="', $module['type'], '" />';
 
         foreach ($module['fields'] as $field) {

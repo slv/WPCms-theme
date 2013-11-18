@@ -17,6 +17,10 @@ jQuery(document).ready(function ($) {
             $(this).attr('name', name);
           }
         });
+        module.find('.module-remove').click(function (e) {
+          e.preventDefault();
+          $(module).remove();
+        });
       });
 
       $.each(_WPCmsGlobalInit, function (Field, Init) {
