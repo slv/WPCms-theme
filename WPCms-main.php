@@ -29,6 +29,7 @@ require_once "WPCms/Classes/WPCmsRadioField.php";
 
 require_once "WPCms/Classes/WPCmsGoogleFontsField.php";
 require_once "WPCms/Classes/WPCmsRelationField.php";
+require_once "WPCms/Classes/WPCmsModulesField.php";
 require_once "WPCms/Classes/WPCmsColorPicker.php";
 require_once "WPCms/Classes/WPCmsUploadField.php";
 require_once "WPCms/Classes/WPCmsImageField.php";
@@ -496,7 +497,48 @@ $customPostType2 = new WPCmsPostType(
 
           new WPCmsImageField(array(
             'id' => 'custom_post_type_image3',
-            'name' => 'Custom Post Image'))
+            'name' => 'Custom Post Image')),
+
+          new WPCmsModulesField(array(
+            'id' => 'modules_test',
+            'name' => 'Modules Test',
+            'modules' => array(
+              array(
+                'name' => 'Test Module 1',
+                'type' => 'gallery',
+                'fields' => array(
+                  new WPCmsInputField(array(
+                    'id' => 'input_nested_test',
+                    'name' => 'Input Nested Test')),
+                  new WPCmsGalleryField (array(
+                    'id' => 'nested_gallery1',
+                    'name' => 'Nested WPCmsGalleryField 1',
+                    'description' => 'Example of WPCmsGalleryField')),
+                  new WPCmsRelationField(array(
+                    'id' => 'custom_post_related',
+                    'name' => 'Related Custom Posts',
+                    'related' => 'post')),
+                  new WPCmsImageField(array(
+                    'id' => 'custom_post_type_image',
+                    'name' => 'Custom Post Image'))
+                )
+              ),
+              array(
+                'name' => 'Test Module 2',
+                'type' => 'gallery_map',
+                'fields' => array(
+                  new WPCmsInputField(array(
+                    'id' => 'input_nested_test2',
+                    'name' => 'Input Nested Test 2')),
+                  new WPCmsRelationField (array(
+                    'id' => 'relation1',
+                    'name' => 'WPCmsRelationField 1',
+                    'description' => 'Example of WPCmsRelationField related to Posts',
+                    'related' => 'post')),
+                )
+              )
+            )))
+
         )
       ),
       'wpcms-format-image' => array(
@@ -544,7 +586,39 @@ $pageType = new WPCmsPostType(array(
       'fields' => array(
         new WPCmsInputField(array(
           'id' => 'input_test',
-          'name' => 'Input Test'))
+          'name' => 'Input Test')),
+        new WPCmsModulesField(array(
+          'id' => 'modules_test',
+          'name' => 'Modules Test',
+          'modules' => array(
+            array(
+              'name' => 'Test Module 1',
+              'type' => 'gallery',
+              'fields' => array(
+                new WPCmsInputField(array(
+                  'id' => 'input_nested_test',
+                  'name' => 'Input Nested Test')),
+                new WPCmsGalleryField (array(
+                  'id' => 'nested_gallery1',
+                  'name' => 'Nested WPCmsGalleryField 1',
+                  'description' => 'Example of WPCmsGalleryField')),
+              )
+            ),
+            array(
+              'name' => 'Test Module 2',
+              'type' => 'gallery_map',
+              'fields' => array(
+                new WPCmsInputField(array(
+                  'id' => 'input_nested_test2',
+                  'name' => 'Input Nested Test 2')),
+                new WPCmsRelationField (array(
+                  'id' => 'relation1',
+                  'name' => 'WPCmsRelationField 1',
+                  'description' => 'Example of WPCmsRelationField related to Posts',
+                  'related' => 'post')),
+              )
+            )
+          )))
       )
     ),
 
