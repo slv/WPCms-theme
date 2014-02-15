@@ -1,5 +1,4 @@
 <?php /* SLIDESHOW FADE */ global $module; ?>
-
 <div class="module_slideshow module_slideshow_<?php echo $module['transition_type']; ?>">
   <div class="relative_placeholder"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/placeholder-2-1.jpg"></div>
   <?php $imageIds = explode(',', $module['images']); foreach ($imageIds as $imageId): ?>

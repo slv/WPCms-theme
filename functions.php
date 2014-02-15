@@ -52,7 +52,7 @@ add_action('widgets_init', 'wpcms_register_menus');
 
 // SHORTCODES
 
-require "Shortcodes/separator.php";
+require "Shortcodes/separator/view.php";
 
 
 // WIDGETS

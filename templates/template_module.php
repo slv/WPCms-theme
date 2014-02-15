@@ -15,7 +15,7 @@ get_header(); ?>
 <?php the_content(); ?>
 
 <div class="center_content">
-  <?php _module('modules_01'); ?>
+  <?php _module('modules_test'); ?>
 </div>
 
 

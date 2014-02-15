@@ -506,12 +506,9 @@ $customPostType2 = new WPCmsPostType(
               array(
                 'name' => 'Slideshow Module 1',
                 'type' => 'slideshow'
-              ),
-              array(
-                'name' => 'Text Module 2',
-                'type' => 'text'
               )
-            )))
+            )
+          ))
 
         )
       ),
@@ -560,7 +557,14 @@ $pageType = new WPCmsPostType(array(
       'fields' => array(
         new WPCmsInputField(array(
           'id' => 'input_test',
-          'name' => 'Input Test')),
+          'name' => 'Input Test'))
+      )
+    ),
+
+    'module-template' => array(
+      'title' => 'Solo per Moduli',
+      'template-file' => 'templates/template_module.php',
+      'fields' => array(
         new WPCmsModulesField(array(
           'id' => 'modules_test',
           'name' => 'Modules Test',
@@ -569,22 +573,8 @@ $pageType = new WPCmsPostType(array(
               'name' => 'Test Module 1',
               'type' => 'slideshow'
             )
-          )))
-      )
-    ),
-
-    'solo-portfolio' => array(
-      'title' => 'Solo per Portfolio',
-      'template-file' => 'template.pagina.test.php',
-      'fields' => array(
-        new WPCmsGoogleMapField(array(
-          'id' => 'mappa11',
-          'name' => 'Projects to Include in Slideshow')),
-
-        new WPCmsRelationField(array(
-          'id' => 'progetti11',
-          'name' => 'Projects to Include in Slideshow',
-          'related' => 'project'))
+          )
+        ))
       )
     )
   )

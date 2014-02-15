@@ -29,7 +29,6 @@ Class WPCmsModulesField Extends WPCmsField {
     foreach ($this->modules as $module) {
       $fields = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
       foreach ($fields as $field) {
-      // foreach ($module['fields'] as $field) {
         $field->addActionAdminEnqueueScripts($hook);
       }
     }
@@ -103,7 +102,6 @@ Class WPCmsModulesField Extends WPCmsField {
 
         $fields = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
         foreach ($fields as $field) {
-        // foreach ($module['fields'] as $field) {
           $field_data = array(
             'id' => isset($field->id) ? $data['id'] . '____[' . $field->id . ']' : '',
             'name' => '',

@@ -17,9 +17,13 @@ function _module($id, $postID = false) {
   if (_m($id, $postID)) {
     foreach(_m($id, $postID) as $key => $m) {
       global $module;
-      $module = $m;
 
-      get_template_part('Modules/' . $m['widget_type'] . '/view');
+      $module = array();
+      foreach ($m as $k => $v) {
+        $module[preg_replace("/^" . WPCmsStatus::getStatus()->getData('pre') . "/", "", $k)] = $v;
+      }
+
+      get_template_part('Modules/' . $module['widget_type'] . '/view');
     }
   }
 }
