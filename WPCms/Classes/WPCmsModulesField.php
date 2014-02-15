@@ -11,6 +11,8 @@ Class WPCmsModulesField Extends WPCmsField {
     $this->modules = isset($config['modules']) ? $config['modules'] : array();
 
     if (is_array($this->modules)) foreach ($this->modules as $module) {
+      $module['fields'] = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
+
       if (is_array($module['fields'])) foreach ($module['fields'] as $field) {
         $field->id = preg_replace("/^" . WPCmsStatus::getStatus()->getData('pre') . "/", "", $field->id);
       }
@@ -25,7 +27,9 @@ Class WPCmsModulesField Extends WPCmsField {
     wp_enqueue_style('wpcms-modules', WPCMS_STYLESHEET_URI . '/WPCms/assets/modules.field.css');
 
     foreach ($this->modules as $module) {
-      foreach ($module['fields'] as $field) {
+      $fields = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
+      foreach ($fields as $field) {
+      // foreach ($module['fields'] as $field) {
         $field->addActionAdminEnqueueScripts($hook);
       }
     }
@@ -97,7 +101,9 @@ Class WPCmsModulesField Extends WPCmsField {
       echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="module-remove">remove</div><div class="form">
         <input type="hidden" id="', $data['id'], '____[widget_type]" value="', $module['type'], '" />';
 
-        foreach ($module['fields'] as $field) {
+        $fields = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
+        foreach ($fields as $field) {
+        // foreach ($module['fields'] as $field) {
           $field_data = array(
             'id' => isset($field->id) ? $data['id'] . '____[' . $field->id . ']' : '',
             'name' => '',

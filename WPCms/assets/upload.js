@@ -43,7 +43,7 @@ _WPCmsGlobalInit.Upload = function ($) {
 
     window.original_send_to_editor = window.send_to_editor;
 
-});
+};
 
 jQuery(document).ready(_WPCmsGlobalInit.Upload);
 
