@@ -37,7 +37,8 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
       echo $selector . "{ font-family: '" . array_shift(explode(':', $font)) . "'; font-weight:" .
         preg_replace(array("/^(regular|italic)$/", "/^(\d*)(italic)$/"), array("400", "$1"), array_pop(explode(':', $font))) .
         "; font-style:" .
-        preg_replace(array("/^(\d*)(.*)/", "/regular/"), array("$2", "normal"), array_pop(explode(':', $font))) .
+        (preg_replace(array("/^(\d*)(.*)/", "/regular/"), array("$2", "normal"), array_pop(explode(':', $font))) ?
+        preg_replace(array("/^(\d*)(.*)/", "/regular/"), array("$2", "normal"), array_pop(explode(':', $font))) : 'normal') .
         "; }" . PHP_EOL;
     }
 
@@ -46,6 +47,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
 
   public function addActionAdminEnqueueScripts ($hook)
   {
+    wp_enqueue_script('wpcms-googlefonts-lib', '//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js');
     wp_enqueue_script('wpcms-googlefonts', WPCMS_STYLESHEET_URI . '/WPCms/assets/google.fonts.js', array('jquery'));
   }
 
@@ -61,7 +63,7 @@ Class WPCmsGoogleFontsField Extends WPCmsField {
     if ($data['value'] == '' && !isset($this->options[$this->default]))
       echo '<option value="">', __('Select', WPCmsStatus::getStatus()->getData('textdomain')),'...</option>';
 
-    $fonts = file_get_contents(WPCMS_STYLESHEET_DIR . '/WPCms/assets/google.fonts.list');
+    $fonts = file_get_contents(WPCMS_STYLESHEET_DIR . '/WPCms/assets/google.fonts.list.20140215');
     $fonts = explode(PHP_EOL, $fonts);
     $families = array();
 

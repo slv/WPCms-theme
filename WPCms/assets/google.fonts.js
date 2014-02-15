@@ -1,14 +1,10 @@
 function WPCmsLoadGoogleFontsScript ()
 {
-    if (!WebFontConfig.google.families.length) return;
-    WebFontConfig.google.families.sort();
-
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
+    WebFont.load({
+        google: {
+            families: WebFontConfig.google.families
+        }
+    });
 }
 
 function WPCmsRenderFonts (k, field)
@@ -17,11 +13,6 @@ function WPCmsRenderFonts (k, field)
 
     if (select.val().length > 3) {
 
-        if (WebFontConfig.google.families.indexOf(WPCmsFontFamilies[select.val()]) < 0) {
-            WebFontConfig.google.families.push(WPCmsFontFamilies[select.val()]);
-            WPCmsLoadGoogleFontsScript();
-        }
-
         jQuery(field).find('.demo').css({
             fontSize: function () { var s = parseInt(jQuery(this).attr('data-fontsize')) || 16; return s; },
             lineHeight: '20px',
@@ -29,6 +20,11 @@ function WPCmsRenderFonts (k, field)
             fontWeight: WPCmsFontStyles[select.val().split(':').pop()][0],
             fontStyle: WPCmsFontStyles[select.val().split(':').pop()][1]
         }).html(select.val());
+
+        if (WebFontConfig.google.families.indexOf(WPCmsFontFamilies[select.val()]) < 0) {
+            WebFontConfig.google.families.push(WPCmsFontFamilies[select.val()]);
+            WPCmsLoadGoogleFontsScript();
+        }
     }
 }
 
