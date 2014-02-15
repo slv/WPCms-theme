@@ -71,6 +71,7 @@ Class WPCmsModulesField Extends WPCmsField {
         echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="module-remove">remove</div><div class="form">
           <input type="hidden" id="', $data['id'], '____[widget_type]" value="', $module['type'], '" />';
 
+        $module['fields'] = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
         foreach ($module['fields'] as $field) {
           $field_data = array(
             'id' => isset($field->id) ? $data['id'] . '____[' . $field->id . ']' : '',
@@ -100,8 +101,8 @@ Class WPCmsModulesField Extends WPCmsField {
       echo '<div class="module"><a>', $module['name'], '</a><div class="module-inside"><h3>Inside of ', $module['name'], '</h3><div class="module-remove">remove</div><div class="form">
         <input type="hidden" id="', $data['id'], '____[widget_type]" value="', $module['type'], '" />';
 
-        $fields = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
-        foreach ($fields as $field) {
+        $module['fields'] = require get_template_directory() . "/Modules/" . $module['type'] . "/admin.php";
+        foreach ($module['fields'] as $field) {
           $field_data = array(
             'id' => isset($field->id) ? $data['id'] . '____[' . $field->id . ']' : '',
             'name' => '',
