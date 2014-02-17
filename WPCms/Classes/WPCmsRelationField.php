@@ -61,4 +61,70 @@ Class WPCmsRelationField Extends WPCmsField {
     echo '</div>';
 
   }
+
+  public function save ($postID, $suffix = '') {
+
+    $field_name = $this->id . $suffix;
+
+    $old = get_post_meta($postID, $field_name, true);
+    $new = isset($_POST[$field_name]) ? $_POST[$field_name] : false;
+
+    if ($new && $new != $old) {
+
+      if (get_magic_quotes_gpc()) $new = stripslashes($new);
+
+      update_post_meta($postID, $field_name, $new);
+
+      // Related inverse
+      $newValues = explode(',', (string)$new);
+      $oldValues = explode(',', (string)$old);
+
+      if (is_array($oldValues)) {
+        foreach ($oldValues as $key => $relatedID) {
+          $relatedOld = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedOldValues = explode(',', (string)$relatedOld);
+
+          if (in_array($postID, $relatedOldValues)) {
+            foreach (array_keys($relatedOldValues, $postID) as $key) {
+              unset($relatedOldValues[$key]);
+            }
+            update_post_meta($postID, $field_name, implode(',', $relatedOldValues));
+          }
+        }
+      }
+
+      if (is_array($newValues)) {
+        foreach ($newValues as $key => $relatedID) {
+          $relatedNew = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedNewValues = explode(',', (string)$relatedNew);
+
+          if (!in_array($postID, $relatedNewValues)) {
+            $relatedNewValues[] = $postID;
+            update_post_meta($postID, $field_name, implode(',', $relatedNewValues));
+          }
+        }
+      }
+    }
+    elseif ('' == $new && $old) {
+
+      delete_post_meta($postID, $field_name, $old);
+
+      $oldValues = explode(',', (string)$old);
+
+      if (is_array($oldValues)) {
+        foreach ($oldValues as $key => $relatedID) {
+          $relatedOld = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedOldValues = explode(',', (string)$relatedOld);
+
+          if (in_array($postID, $relatedOldValues)) {
+            foreach (array_keys($relatedOldValues, $postID) as $key) {
+              unset($relatedOldValues[$key]);
+            }
+            update_post_meta($postID, $field_name, implode(',', $relatedOldValues));
+          }
+        }
+      }
+    }
+  }
+
 }
