@@ -5,6 +5,7 @@ Class WPCmsRelationField Extends WPCmsField {
   function __construct ($config)
   {
     $this->id = WPCmsStatus::getStatus()->getData('pre') . $this->normalize($config['id']);
+    $this->inverse = $this->normalize($config['inverse']);
     $this->name = isset($config['name']) ? $config['name'] : '';
     $this->description = isset($config['description']) ? $config['description'] : '';
     $this->default = isset($config['default']) ? $config['default'] : '';
@@ -65,9 +66,12 @@ Class WPCmsRelationField Extends WPCmsField {
   public function save ($postID, $suffix = '') {
 
     $field_name = $this->id . $suffix;
+    if ($this->inverse) $inverse = WPCmsStatus::getStatus()->getData('pre') . $this->inverse . $suffix;
+    else $inverse = $field_name . '__related_as';
 
     $old = get_post_meta($postID, $field_name, true);
     $new = isset($_POST[$field_name]) ? $_POST[$field_name] : false;
+
 
     if ($new && $new != $old) {
 
@@ -79,28 +83,32 @@ Class WPCmsRelationField Extends WPCmsField {
       $newValues = explode(',', (string)$new);
       $oldValues = explode(',', (string)$old);
 
+      // Fix revisions...
+      if ($post = wp_get_post_revision($postID))
+        $postID = $post->post_parent;
+
       if (is_array($oldValues)) {
         foreach ($oldValues as $key => $relatedID) {
-          $relatedOld = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedOld = get_post_meta($relatedID, $inverse, true);
           $relatedOldValues = explode(',', (string)$relatedOld);
 
           if (in_array($postID, $relatedOldValues)) {
             foreach (array_keys($relatedOldValues, $postID) as $key) {
               unset($relatedOldValues[$key]);
             }
-            update_post_meta($postID, $field_name, implode(',', $relatedOldValues));
+            update_post_meta($relatedID, $inverse, trim(implode(',', $relatedOldValues), ','));
           }
         }
       }
 
       if (is_array($newValues)) {
         foreach ($newValues as $key => $relatedID) {
-          $relatedNew = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedNew = get_post_meta($relatedID, $inverse, true);
           $relatedNewValues = explode(',', (string)$relatedNew);
 
           if (!in_array($postID, $relatedNewValues)) {
             $relatedNewValues[] = $postID;
-            update_post_meta($postID, $field_name, implode(',', $relatedNewValues));
+            update_post_meta($relatedID, $inverse, trim(implode(',', $relatedNewValues), ','));
           }
         }
       }
@@ -111,16 +119,20 @@ Class WPCmsRelationField Extends WPCmsField {
 
       $oldValues = explode(',', (string)$old);
 
+      // Fix revisions...
+      if ($post = wp_get_post_revision($postID))
+        $postID = $post->post_parent;
+
       if (is_array($oldValues)) {
         foreach ($oldValues as $key => $relatedID) {
-          $relatedOld = get_post_meta($relatedID, '__related_as_' . $field_name, true);
+          $relatedOld = get_post_meta($relatedID, $inverse, true);
           $relatedOldValues = explode(',', (string)$relatedOld);
 
           if (in_array($postID, $relatedOldValues)) {
             foreach (array_keys($relatedOldValues, $postID) as $key) {
               unset($relatedOldValues[$key]);
             }
-            update_post_meta($postID, $field_name, implode(',', $relatedOldValues));
+            update_post_meta($relatedID, $inverse, trim(implode(',', $relatedOldValues), ','));
           }
         }
       }

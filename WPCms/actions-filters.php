@@ -13,6 +13,12 @@ function _m($label, $postID = false) {
   return get_post_meta($postID, WPCmsStatus::getStatus()->getData('pre') . $label, true);
 }
 
+function _is_related_to($label, $postID = false) {
+  if (!$postID) $postID = get_the_ID();
+
+  return get_post_meta($postID, WPCmsStatus::getStatus()->getData('pre') . $label . '__related_as', true);
+}
+
 function _module($id, $postID = false) {
   if (_m($id, $postID)) {
     foreach(_m($id, $postID) as $key => $m) {

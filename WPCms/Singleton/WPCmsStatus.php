@@ -12,6 +12,11 @@ Class WPCmsStatus
 
    }
 
+   public static function normalize($str)
+   {
+    return strtolower(preg_replace(array("/(\s+)/", "/([^a-zA-Z0-9_]*)/", "/(_+)/"), array("_", "", "_"), $str));
+   }
+
    public static function getStatus()
    {
       if(self::$instance == null)
